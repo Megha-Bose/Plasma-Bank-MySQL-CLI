@@ -1,20 +1,27 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
+import add
+from add import * 
 
-def adminOpt():
-    print("1. View your details")  # view details
-    print("2. Hire staff")
-    print("3. Update staff")  # Hire an Employee
-    print("4. Delete staff")
-    print("5. Search for staff")  # based undecided
-    print("6. Average salary of staff")  # Hire an Employee
-    print("7. Add dependent of staff")
-    print("8. Delete dependent")  # based undecided
-    print("9. Logout")
-    ch = int(input("Enter choice> "))
-    if ch==9:
-    	return
+def adminOpt(cur, con):
+    while(1):
+        print("1. View your details")  # view details
+        print("2. Hire staff")
+        print("3. Update staff")  # Hire an Employee
+        print("4. Delete staff")
+        print("5. Search for staff")  # based undecided
+        print("6. Average salary of staff")  # Hire an Employee
+        print("7. Add dependent of staff")
+        print("8. Delete dependent")  # based undecided
+        print("9. Logout")
+        ch = int(input("Enter choice> "))
+        if ch==9:
+        	return
+        elif ch==2:
+            hireStaff(cur, con)
+        elif ch==7:
+            addDep(cur, con)
 
 def staffOpt():
     print("1. Add vehicle")

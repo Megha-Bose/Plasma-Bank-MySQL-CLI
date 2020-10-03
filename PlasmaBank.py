@@ -32,7 +32,7 @@ def checkID(id):
     elif id.find("DONOR")>=0:
         donorOpt()
     elif id.find("ADMIN")>=0:
-        adminOpt()
+        adminOpt(cur,con)
     else:
         print("Invalid id. You have no permissions")
 
@@ -47,10 +47,12 @@ def loginUser(): # to determine access
         #print(query)
         if cur.execute(query):
             print("Login Successful")
+            con.commit()
             checkID(row["Login_id"])
         else:
             print("Login failed")
-        con.commit()
+            con.commit()
+        
 
     except Exception as e:
         con.rollback()
