@@ -1,7 +1,8 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
-
+import options
+from options import *
 
 def option2():
     """
@@ -23,6 +24,17 @@ def option4():
     """
     print("Not implemented")
 
+def checkID(id):
+    if id.find("STAFF")>=0:
+        staffOpt()
+    elif id.find("HOSP")>=0:
+        hospOpt()
+    elif id.find("DONOR")>=0:
+        donorOpt()
+    elif id.find("ADMIN")>=0:
+        adminOpt()
+    else:
+        print("Invalid id. You have no permissions")
 
 def loginUser(): # to determine access
     try:
@@ -35,6 +47,7 @@ def loginUser(): # to determine access
         #print(query)
         if cur.execute(query):
             print("Login Successful")
+            checkID(row["Login_id"])
         else:
             print("Login failed")
         con.commit()
