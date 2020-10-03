@@ -17,10 +17,32 @@ def adminOpt():
     	return
 
 def staffOpt():
-    print("6. Logout")	
+    print("1. Add vehicle")
+    print("2. Update vehicle availability")
+    print("3. Delete vehicle")
+    print("4. Update department")
+    print("5. Add plasma sample")
+    print("6. Update plasma sample")
+    print("7. Plasma samples of a blood type")
+    print("8. Add donor")
+    print("9. Update donor")
+    print("10. Delete donor")
+    print("11. Donors with more than x donations")
+    print("12. Donor with maximum number of donations")
+    print("13. Average number of donations per month in a particular year")
+    print("14. Average number of orders placed per month in a particular year")
+    print("15. Average number of donations per month in a particular year")
+    print("16. Logout")
+    ch = int(input("Enter choice> "))
+    if ch==16:
+    	return	
 
 def donorOpt():
-    print("6. Logout")	
+    print("1. Plasma sample details") # based on donor id
+    print("2. Logout")
+    ch = int(input("Enter choice> "))
+    if ch==2:
+    	return	
 
 def hospOpt():
     print("1. Place order")
