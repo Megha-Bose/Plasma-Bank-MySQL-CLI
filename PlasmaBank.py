@@ -32,11 +32,12 @@ def loginUser(): # to determine access
         row["Password"] = input("Password: ")
         #if(row["Login_id"] != "Admin"):
         query = "SELECT * FROM USER WHERE Login_id like '%s' AND Password like '%s'" % (row["Login_id"], row["Password"])
-        print(query)
-        cur.execute(query)
+        #print(query)
+        if cur.execute(query):
+            print("Login Successful")
+        else:
+            print("Login failed")
         con.commit()
-
-        print("Login Successful")
 
     except Exception as e:
         con.rollback()
@@ -68,15 +69,15 @@ while(1):
     tmp = sp.call('clear', shell=True)
     
     # Can be skipped if you want to hard core username and password
- #   username = input("Username: ")
-  #  password = input("Password: ")
+    username = input("MYSQL Username: ")
+    password = input("MYSQL Password: ")
 
     try:
         # Set db name accordingly which have been create by you
         # Set host to the server's address if you don't want to use local SQL server 
         con = pymysql.connect(host='localhost',
-                              user='root',
-                              password='password',
+                              user=username,
+                              password=password,
                               db='plasma_bank',
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
@@ -92,18 +93,17 @@ while(1):
             while(1):
                 tmp = sp.call('clear', shell=True)
                 # Here taking example of Employee Mini-world
-                print("1. Option 1")  # Hire an Employee
-                print("2. Option 2")  # Fire an Employee
-                print("3. Option 3")  # Promote Employee
-                print("4. Option 4")  # Employee Statistics
-                print("5. Logout")
+                print("1. Login")  # Hire an Employee
+                print("2. Exit")  # Fire an Employee
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
-                if ch == 5:
+                if ch == 2:
                     break
                 else:
                     dispatch(ch)
                     tmp = input("Enter any key to CONTINUE>")
+        if ch == 2:
+            break
 
     except:
         tmp = sp.call('clear', shell=True)
