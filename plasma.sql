@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: plasma_bank
+-- Host: 127.0.0.1    Database: plasma
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -128,6 +128,71 @@ LOCK TABLES `HOSPITAL` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `LOGISTICS`
+--
+
+DROP TABLE IF EXISTS `LOGISTICS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `LOGISTICS` (
+  `Vehicle_id` varchar(10) NOT NULL,
+  `Vehicle_type` varchar(50) NOT NULL,
+  `Availability` tinyint(1) NOT NULL,
+  `Deliveries` int NOT NULL,
+  `Department_id` varchar(12) NOT NULL,
+  PRIMARY KEY (`Vehicle_id`),
+  KEY `Department_id` (`Department_id`),
+  KEY `Vehicle_type` (`Vehicle_type`),
+  CONSTRAINT `LOGISTICS_ibfk_1` FOREIGN KEY (`Department_id`) REFERENCES `DEPARTMENT` (`Department_id`),
+  CONSTRAINT `LOGISTICS_ibfk_2` FOREIGN KEY (`Vehicle_type`) REFERENCES `VEHICLE_DETAILS` (`Vehicle_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `LOGISTICS`
+--
+
+LOCK TABLES `LOGISTICS` WRITE;
+/*!40000 ALTER TABLE `LOGISTICS` DISABLE KEYS */;
+/*!40000 ALTER TABLE `LOGISTICS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ORDER_REQUEST`
+--
+
+DROP TABLE IF EXISTS `ORDER_REQUEST`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ORDER_REQUEST` (
+  `Order_id` varchar(12) NOT NULL,
+  `Blood_type` varchar(5) NOT NULL,
+  `Order_date` date NOT NULL,
+  `Distance` decimal(6,2) NOT NULL,
+  `Accepted` tinyint(1) NOT NULL,
+  `Vehicle_id` varchar(10) DEFAULT NULL,
+  `Donor_id` varchar(12) DEFAULT NULL,
+  `Hospital_id` varchar(12) NOT NULL,
+  PRIMARY KEY (`Order_id`),
+  KEY `Vehicle_id` (`Vehicle_id`),
+  KEY `Hospital_id` (`Hospital_id`),
+  KEY `Donor_id` (`Donor_id`),
+  CONSTRAINT `ORDER_REQUEST_ibfk_1` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`),
+  CONSTRAINT `ORDER_REQUEST_ibfk_2` FOREIGN KEY (`Hospital_id`) REFERENCES `HOSPITAL` (`Hospital_id`),
+  CONSTRAINT `ORDER_REQUEST_ibfk_3` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ORDER_REQUEST`
+--
+
+LOCK TABLES `ORDER_REQUEST` WRITE;
+/*!40000 ALTER TABLE `ORDER_REQUEST` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ORDER_REQUEST` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `PATIENT`
 --
 
@@ -209,6 +274,41 @@ LOCK TABLES `PLASMA` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `PLASMA_INVENTORY`
+--
+
+DROP TABLE IF EXISTS `PLASMA_INVENTORY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PLASMA_INVENTORY` (
+  `Inventory_id` varchar(12) NOT NULL,
+  `No_of_Aplus` int NOT NULL,
+  `No_of_Aminus` int NOT NULL,
+  `No_of_Bplus` int NOT NULL,
+  `No_of_Bminus` int NOT NULL,
+  `No_of_Oplus` int NOT NULL,
+  `No_of_Ominus` int NOT NULL,
+  `No_of_ABplus` int NOT NULL,
+  `No_of_ABminus` int NOT NULL,
+  `Capacity` int NOT NULL,
+  `Vacancy` int NOT NULL,
+  `Department_id` varchar(12) NOT NULL,
+  PRIMARY KEY (`Inventory_id`),
+  KEY `Department_id` (`Department_id`),
+  CONSTRAINT `PLASMA_INVENTORY_ibfk_1` FOREIGN KEY (`Department_id`) REFERENCES `DEPARTMENT` (`Department_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PLASMA_INVENTORY`
+--
+
+LOCK TABLES `PLASMA_INVENTORY` WRITE;
+/*!40000 ALTER TABLE `PLASMA_INVENTORY` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PLASMA_INVENTORY` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `STAFF`
 --
 
@@ -264,6 +364,37 @@ CREATE TABLE `STAFF_SKILLS` (
 LOCK TABLES `STAFF_SKILLS` WRITE;
 /*!40000 ALTER TABLE `STAFF_SKILLS` DISABLE KEYS */;
 /*!40000 ALTER TABLE `STAFF_SKILLS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SUPPLY`
+--
+
+DROP TABLE IF EXISTS `SUPPLY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SUPPLY` (
+  `Order_id` varchar(12) NOT NULL,
+  `Donor_id` varchar(12) DEFAULT NULL,
+  `Vehicle_id` varchar(10) DEFAULT NULL,
+  `Inventory_id` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`Order_id`),
+  KEY `Donor_id` (`Donor_id`),
+  KEY `Vehicle_id` (`Vehicle_id`),
+  KEY `Inventory_id` (`Inventory_id`),
+  CONSTRAINT `SUPPLY_ibfk_1` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`),
+  CONSTRAINT `SUPPLY_ibfk_2` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`),
+  CONSTRAINT `SUPPLY_ibfk_3` FOREIGN KEY (`Inventory_id`) REFERENCES `PLASMA_INVENTORY` (`Inventory_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SUPPLY`
+--
+
+LOCK TABLES `SUPPLY` WRITE;
+/*!40000 ALTER TABLE `SUPPLY` DISABLE KEYS */;
+/*!40000 ALTER TABLE `SUPPLY` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -349,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-02 16:33:03
+-- Dump completed on 2020-10-03 12:06:48
