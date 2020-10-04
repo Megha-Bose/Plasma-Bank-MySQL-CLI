@@ -1,9 +1,16 @@
 def updateStaff(cur,con):
 	
 	try:
+		value=0
 		row = {}
-		row["sid"] = input("Enter Staff_id of staff whose details you wish to update: ")
-        
+		
+		while(value==0):
+			row["sid"] = input("Enter Staff_id of staff whose details you wish to update: ")
+			que = "SELECT * FROM STAFF WHERE Staff_id LIKE '%s'" % (row["sid"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid Staff_id")
+			con.commit()
         #row = {}
         #print("Enter new staff's details: ")
         #row["Staff_id"] = input("Staff ID: ")
@@ -13,7 +20,9 @@ def updateStaff(cur,con):
 		if cha == 1:
 			row["Newfname"] = input("Enter new First name : ")
 			query = "UPDATE STAFF SET First_name = '%s' WHERE Staff_id LIKE '%s'" % (row["Newfname"], row["sid"])
-			cur.execute(query)
+			#value=cur.execute(query)
+			
+			#print(value)
 			con.commit()
 		else:
 			print("")
