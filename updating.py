@@ -107,3 +107,58 @@ def updateVehAv(cur,con):
 			print(">>>>>>>>>>>>>", e)
 
 	return
+def updateDept(cur,con):
+
+	try:
+		value=0
+		row = {}
+
+		while(value==0):
+			row["did"] = input("Enter department id of the department whose details you wish to change: ")
+			que = "SELECT * FROM DEPARTMENT WHERE Department_id LIKE '%s'" % (row["did"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid Department id")
+			con.commit()
+
+		print("Do you want to edit the following fields? ")
+		cha = int(input("Manager (1/0) : "))
+		if cha == 1:
+			row["Newman"] = input("Enter new manager id : ")
+			query = "UPDATE DEPARTMENT SET Manager = '%s' WHERE Department_id LIKE '%s'" % (row["Newman"], row["did"])
+			cur.execute(query)
+			con.commit()
+		else:
+			print("")
+		cha = int(input("Description (1/0) : "))
+		if cha == 1:
+			row["Newdes"] = input("Enter new description : ")
+			if row["Newdes"]=='' or row["Newdes"]=='NULL':
+				row["Newdes"]='NULL'
+			else:
+				row["Newdes"]= "'"+row["Newdes"]+"'"
+			query = "UPDATE DEPARTMENT SET Description = '%s' WHERE Department_id LIKE '%s'" % (row["Newdes"], row["did"])
+			cur.execute(query)
+			con.commit()
+		else:
+			print("")
+		cha = int(input("Remarks (1/0) : "))
+		if cha == 1:
+			row["Newrem"] = input("Enter new remarks : ")
+			if row["Newrem"]=='' or row["Newrem"]=='NULL':
+				row["Newrem"]='NULL'
+			else:
+				row["Newrem"]= "'"+row["Newrem"]+"'"
+			query = "UPDATE DEPARTMENT SET Remarks = '%s' WHERE Department_id LIKE '%s'" % (row["Newrem"], row["did"])
+			cur.execute(query)
+			con.commit()
+		else:
+			print("")
+		print("Updated Database")
+
+	except Exception as e:
+		con.rollback()
+		print("Failed to update staff")
+		print(">>>>>>>>>>>>>", e)
+
+	return
