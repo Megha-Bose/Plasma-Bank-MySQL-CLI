@@ -26,11 +26,11 @@ def option4():
 
 def checkID(id):
     if id.find("STAFF")>=0:
-        staffOpt(cur,con)
+        staffOpt()
     elif id.find("HOSP")>=0:
-        hospOpt(cur,con)
+        hospOpt()
     elif id.find("DONOR")>=0:
-        donorOpt(cur,con)
+        donorOpt()
     elif id.find("ADMIN")>=0:
         adminOpt(cur,con)
     else:
