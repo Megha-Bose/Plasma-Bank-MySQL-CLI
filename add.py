@@ -6,8 +6,7 @@
     If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
     HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
 """
-import updated
-import * from updated
+
 
 def newUser(cur,con,login):
     
@@ -174,14 +173,30 @@ def addPlasma(cur, con):
         con.commit()
 
 
-        """
-        
-        ANANYA UPDATE INVENTORY VACANCY PLS
+        #updating inventory
+        que = "SELECT Blood_type FROM DONOR WHERE Donor_id LIKE '%s'" % (row["Donor_id"])     
+        if cur.execute(que):
+            btype = cur.fetchall(que)
 
-        updateInv(cur,con)
-
-        """
+        if btype == "A+":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Aplus = No_of_Aplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "A-":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Aminus = No_of_Aminus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "B+":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Bplus = No_of_Bplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "B-":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Bminus = No_of_Bminus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "O+":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Oplus = No_of_Oplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "O-":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_Ominus = No_of_Ominus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "AB+":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_ABplus = No_of_ABplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+        if btype == "AB-":
+            quer = "UPDATE PLASMA_INVENTORY SET No_of_ABminus = No_of_ABminus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
         
+        cur.execute(quer)
+        con.commit()
 
         print("Inserted Into Database")
 
