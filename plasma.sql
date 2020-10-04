@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: plasma
+-- Host: 127.0.0.1    Database: plasma_bank
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -38,6 +38,7 @@ CREATE TABLE `DEPARTMENT` (
 
 LOCK TABLES `DEPARTMENT` WRITE;
 /*!40000 ALTER TABLE `DEPARTMENT` DISABLE KEYS */;
+INSERT INTO `DEPARTMENT` VALUES ('DL','1234','list of vehicles in logistivs dept',2,NULL),('DPI','1','count of samples in each inventory in plasma inventories dept',3,NULL);
 /*!40000 ALTER TABLE `DEPARTMENT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +340,7 @@ CREATE TABLE `STAFF` (
 
 LOCK TABLES `STAFF` WRITE;
 /*!40000 ALTER TABLE `STAFF` DISABLE KEYS */;
-INSERT INTO `STAFF` VALUES ('1234','test','name','2020-10-05',4396873,'1980-01-01',28,NULL,'STAFF1234');
+INSERT INTO `STAFF` VALUES ('1234','ahana','name','2020-10-05',4396873,'1980-01-01',28,NULL,'STAFF1234');
 /*!40000 ALTER TABLE `STAFF` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-04 12:39:14
+-- Dump completed on 2020-10-04 14:50:49
