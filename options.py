@@ -3,6 +3,8 @@ import pymysql
 import pymysql.cursors
 import add
 from add import * 
+import updating
+from updating import *
 
 def adminOpt(cur, con):
     while(1):
@@ -20,6 +22,8 @@ def adminOpt(cur, con):
         	return
         elif ch==2:
             hireStaff(cur, con)
+        elif ch==3:
+            updateStaff(cur, con)
         elif ch==7:
             addDep(cur, con)
 
