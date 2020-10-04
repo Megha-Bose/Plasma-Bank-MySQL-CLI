@@ -165,6 +165,7 @@ def addPlasma(cur, con):
             return
 
         inventory_id = cur.fetchall()[0][0]
+        con.commit()
         query = "INSERT INTO PLASMA(Donor_id, Donation_date, Sample_no, Used, Inventory_id) VALUES('%s', '%s', %d, 0, '%s')" % (
             row["Donor_id"], row["Donation_date"], row["Sample_no"], inventory_id)
 
@@ -230,48 +231,3 @@ def addInventory(cur, con):
 
     return
 
-def placeOrder(cur,con):
-    try:
-        row = {}
-        print("Enter details to place order: ")
-        row["Hospital_id"] = input("Hospital ID:")
-        row["name"] = (input("Hospital Name: "))
-        row["dist"] = float(input("Hospital Distance from plasma bank: "))
-        row["Login_id"] = "HOSP"+row["Hospital_id"]
-        newUser(cur,con,row["Login_id"])
-        
-        query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
-            row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
-        cur.execute(query)
-        con.commit()
-
-        row["Patient_id"] = input("Patient ID: ")
-        name = (input("Name (Fname Lname): ")).split(' ')
-        row["Fname"] = name[0]
-        row["Lname"] = name[1]
-        row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
-        row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
-
-        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', 28)" % (
-            row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-
-        row["Order_id"] = input("Order ID:")
-        row["Order_date"] = (input("Order date: "))
-        query = "INSERT INTO ORDER_REQUEST(Order_id, Vehicle_id, Order_date, Hospital_id, Blood_type, Accepted, Distance, Donor_id) VALUES('%s', NULL, '%s', '%s', '%s', 0, %f, NULL)" % (
-            row["Order_id"], row["Order_date"], row["Hospital_id"], row["Blood_type"], row["dist"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-        print("Inserted Into Database")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database")
-        print(">>>>>>>>>>>>>", e)
-
-    return
