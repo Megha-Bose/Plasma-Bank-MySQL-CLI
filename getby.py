@@ -111,7 +111,7 @@ def getVehi(cur,con):
 
 
 def getDept(cur,con):
-while(1):
+    while(1):
         print("1. Get")
         print("2. Go back")
         ch = int(input("Enter choice> "))
@@ -123,7 +123,7 @@ while(1):
 
 
 def getDepen(cur,con):
-while(1):
+    while(1):
         print("1. Get")
         print("2. Go back")
         ch = int(input("Enter choice> "))
@@ -135,7 +135,7 @@ while(1):
 
 
 def getPatient(cur,con):
-while(1):
+    while(1):
         print("1. Get")
         print("2. Go back")
         ch = int(input("Enter choice> "))
