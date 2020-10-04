@@ -26,13 +26,13 @@ def option4():
 
 def checkID(id):
     if id.find("STAFF")>=0:
-        staffOpt()
+        staffOpt(cur,con,id)
     elif id.find("HOSP")>=0:
-        hospOpt()
+        hospOpt(cur,con,id)
     elif id.find("DONOR")>=0:
-        donorOpt()
+        donorOpt(cur,con,id)
     elif id.find("ADMIN")>=0:
-        adminOpt(cur,con)
+        adminOpt(cur,con,id)
     else:
         print("Invalid id. You have no permissions")
 
