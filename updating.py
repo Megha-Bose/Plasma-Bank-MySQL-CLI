@@ -24,40 +24,35 @@ def updateStaff(cur,con):
 			
 			#print(value)
 			con.commit()
-		else:
-			print("")
+		
 		cha = int(input("Last name (1/0) : "))
 		if cha == 1:
 			row["Newlname"] = input("Enter new Last name : ")
 			query = "UPDATE STAFF SET Last_name = '%s' WHERE Staff_id LIKE '%s'" % (row["Newlname"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+	
 		cha = int(input("Birth date (1/0) : "))
 		if cha == 1:
 			row["Newbd"] = input("Enter new Birth date : ")
 			query = "UPDATE STAFF SET Birth_date = '%s', Age = 28 WHERE Staff_id LIKE '%s'" % (row["Newbd"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+		
 		cha = int(input("Salary (1/0) : "))
 		if cha == 1:
 			row["Newsal"] = float(input("Enter new Salary : "))
 			query = "UPDATE STAFF SET Salary = '%f' WHERE Staff_id LIKE '%s'" % (row["Newsal"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+		
 		cha = int(input("Date of joining (1/0) : "))
 		if cha == 1:
 			row["Newdoj"] = input("Enter new Date of joining : ")
 			query = "UPDATE STAFF SET Date_of_joining = '%s' WHERE Staff_id LIKE '%s'" % (row["Newdoj"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+	
 		cha = int(input("Supervisor (1/0) : "))
 		if cha == 1:
 			row["Newsup"] = input("Enter new Supervisor : ")
@@ -68,8 +63,7 @@ def updateStaff(cur,con):
 			query = "UPDATE STAFF SET Supervisor = '%s' WHERE Staff_id LIKE '%s'" % (row["Newsup"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+		
         #ch = int(input("Staff skills (1/0) : "))  
         
 		print("Updated Database")
@@ -103,7 +97,7 @@ def updateVehAv(cur,con):
 
 	except Exception as e:
 			con.rollback()
-			print("Failed to update staff")
+			print("Failed to update vehicle")
 			print(">>>>>>>>>>>>>", e)
 
 	return
@@ -128,8 +122,7 @@ def updateDept(cur,con):
 			query = "UPDATE DEPARTMENT SET Manager = '%s' WHERE Department_id LIKE '%s'" % (row["Newman"], row["did"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+	
 		cha = int(input("Description (1/0) : "))
 		if cha == 1:
 			row["Newdes"] = input("Enter new description : ")
@@ -140,8 +133,7 @@ def updateDept(cur,con):
 			query = "UPDATE DEPARTMENT SET Description = '%s' WHERE Department_id LIKE '%s'" % (row["Newdes"], row["did"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+		
 		cha = int(input("Remarks (1/0) : "))
 		if cha == 1:
 			row["Newrem"] = input("Enter new remarks : ")
@@ -152,13 +144,77 @@ def updateDept(cur,con):
 			query = "UPDATE DEPARTMENT SET Remarks = '%s' WHERE Department_id LIKE '%s'" % (row["Newrem"], row["did"])
 			cur.execute(query)
 			con.commit()
-		else:
-			print("")
+	
 		print("Updated Database")
 
 	except Exception as e:
 		con.rollback()
-		print("Failed to update staff")
+		print("Failed to update department")
 		print(">>>>>>>>>>>>>", e)
 
 	return
+
+def updateDonor(cur,con):
+
+	try:
+		value=0
+		row = {}
+
+		while(value==0):
+			row["did"] = input("Enter donor id of the donor whose details you wish to change: ")
+			que = "SELECT * FROM DONOR WHERE Donor_id LIKE '%s'" % (row["did"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid Donor id")
+			con.commit()
+
+		print("Do you want to edit the following fields? ")
+		cha = int(input("Name (1/0) : "))
+		if cha == 1:
+			row["Newnam"] = input("Enter new name : ")
+			query = "UPDATE DONOR SET Name = '%s' WHERE Donor_id LIKE '%s'" % (row["Newnam"], row["did"])
+			cur.execute(query)
+			con.commit()
+	
+		cha = int(input("Aadhar_num (1/0) : "))
+		if cha == 1:
+			row["NewnUm"] = input("Enter new Aadhar_num : ")
+			query = "UPDATE DONOR SET Aadhar_num = '%d' WHERE Donor_id LIKE '%s'" % (row["Newnum"], row["did"])
+			cur.execute(query)
+			con.commit()
+	
+		cha = int(input("Blood_type (1/0) : "))
+		if cha == 1:
+			row["Newb"] = input("Enter new Blood_type : ")
+			query = "UPDATE DONOR SET Blood_type = '%s' WHERE Donor_id LIKE '%s'" % (row["Newb"], row["did"])
+			cur.execute(query)
+			con.commit()
+	
+		cha = int(input("Number_of_donations (1/0) : "))
+		if cha == 1:
+			row["Newnd"] = input("Enter new Number_of_donations : ")
+			query = "UPDATE DONOR SET Number_of_donations = '%d' WHERE Donor_id LIKE '%s'" % (row["Newnd"], row["did"])
+			cur.execute(query)
+			con.commit()
+	
+			cha = int(input("Birth date (1/0) : "))
+		if cha == 1:
+			row["Newbd"] = input("Enter new Birth date : ")
+			query = "UPDATE DONOR SET Birth_date = '%s', Age = 28 WHERE Donor_id LIKE '%s'" % (row["Newbd"], row["sid"])
+			cur.execute(query)
+			con.commit()
+	
+		print("Updated Database")
+
+	except Exception as e:
+		con.rollback()
+		print("Failed to update donor")
+		print(">>>>>>>>>>>>>", e)
+
+	return
+
+
+
+
+
+
