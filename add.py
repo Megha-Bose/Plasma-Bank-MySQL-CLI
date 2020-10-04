@@ -19,16 +19,27 @@ def hireStaff(cur,con):
         row["Salary"] = float(input("Salary: "))
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["sup"] = input("Supervisor staff ID: ")
-        row["login_id"] = input("Login ID: ")
+        row["Login_id"] = "STAFF" + row["Staff_id"]
 
         if row["sup"]=='' or row["sup"]=='NULL':
             row["sup"]='NULL'
         else:
             row["sup"]= "'"+row["sup"]+"'"
+        
+        row["Password"] = input("Password: ")
+        row["Contact"] = int(input("Contact Number: "))
+        row["Address"] = input("Address: ")
 
+
+        query = "INSERT INTO USER(Login_id, Password, Contact, Address) VALUES('%s', '%s', '%d', '%s')" % (
+            row["Login_id"], row["Password"], row["Contact"], row["Address"])
+
+        print(query)
+        cur.execute(query)
+        con.commit()
 
         query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %f, '%s', %s, '%s', 28)" % (
-            row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["login_id"])
+            row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["Login_id"])
 
         print(query)
         cur.execute(query)
@@ -83,7 +94,7 @@ def addVehi(cur,con):
         row["Vehicle_id"] = input("Vehicle ID: ")
         row["Vehicle_type"] = input("Vehicle_type (HCV, LCV, Two-wheeler, Car): ")
         row["Availability"] = int(input("Vehicle Availability (1, 0): "))
-        row["Deliveries"] = 0
+        row["Deliveries"] = input("Number of deliveries: ")
         row["Department_id"] = input("Department_id: ")
 
         query = "INSERT INTO LOGISTICS(Vehicle_id, Vehicle_type, Availability, Deliveries, Department_id) VALUES('%s', '%s', '%d', '%d', %s)" % (
