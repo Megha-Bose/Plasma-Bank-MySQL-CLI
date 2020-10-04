@@ -26,11 +26,11 @@ def option4():
 
 def checkID(id):
     if id.find("STAFF")>=0:
-        staffOpt()
+        staffOpt(cur,con)
     elif id.find("HOSP")>=0:
-        hospOpt()
+        hospOpt(cur,con)
     elif id.find("DONOR")>=0:
-        donorOpt()
+        donorOpt(cur,con)
     elif id.find("ADMIN")>=0:
         adminOpt(cur,con)
     else:
@@ -86,6 +86,7 @@ while(1):
     # Can be skipped if you want to hard core username and password
     username = input("MYSQL Username: ")
     password = input("MYSQL Password: ")
+    dbname = input("Database Name: ")
 
     try:
         # Set db name accordingly which have been create by you
@@ -93,7 +94,7 @@ while(1):
         con = pymysql.connect(host='localhost',
                               user=username,
                               password=password,
-                              db='plasma_bank',
+                              db=dbname,
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
 

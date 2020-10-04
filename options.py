@@ -23,7 +23,7 @@ def adminOpt(cur, con):
         elif ch==7:
             addDep(cur, con)
 
-def staffOpt():
+def staffOpt(cur,con):
     print("1. Add vehicle")
     print("2. Update vehicle availability")
     print("3. Delete vehicle")
@@ -46,14 +46,14 @@ def staffOpt():
     elif ch==1:
         addVehi(cur, con)	
 
-def donorOpt():
+def donorOpt(cur,con):
     print("1. Plasma sample details") # based on donor id
     print("2. Logout")
     ch = int(input("Enter choice> "))
     if ch==2:
     	return	
 
-def hospOpt():
+def hospOpt(cur,con):
     print("1. Place order")
     print("2. Logout")
     ch = int(input("Enter choice> "))

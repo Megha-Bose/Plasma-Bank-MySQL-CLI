@@ -94,7 +94,7 @@ def addVehi(cur,con):
         row["Vehicle_id"] = input("Vehicle ID: ")
         row["Vehicle_type"] = input("Vehicle_type (HCV, LCV, Two-wheeler, Car): ")
         row["Availability"] = int(input("Vehicle Availability (1, 0): "))
-        row["Deliveries"] = input("Number of deliveries: ")
+        row["Deliveries"] = int(input("Number of deliveries: "))
         row["Department_id"] = input("Department_id: ")
 
         query = "INSERT INTO LOGISTICS(Vehicle_id, Vehicle_type, Availability, Deliveries, Department_id) VALUES('%s', '%s', '%d', '%d', %s)" % (
