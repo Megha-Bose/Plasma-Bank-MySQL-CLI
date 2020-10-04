@@ -6,6 +6,9 @@
     If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
     HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
 """
+import updated
+import * from updated
+
 def newUser(cur,con,login):
     
     row={}
@@ -174,6 +177,8 @@ def addPlasma(cur, con):
         """
         
         ANANYA UPDATE INVENTORY VACANCY PLS
+
+        updateInv(cur,con)
 
         """
         
