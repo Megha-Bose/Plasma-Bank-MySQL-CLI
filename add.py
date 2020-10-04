@@ -261,7 +261,7 @@ def placeOrder(cur,con):
 
         row["Order_id"] = input("Order ID:")
         row["Order_date"] = (input("Order date: "))
-        uery = "INSERT INTO ORDER_REQUEST(Order_id, Vehicle_id, Order_date, Hospital_id, Blood_type, Accepted, Distance, Donor_id) VALUES('%s', NULL, '%s', '%s', '%s', 0, %f, NULL)" % (
+        query = "INSERT INTO ORDER_REQUEST(Order_id, Vehicle_id, Order_date, Hospital_id, Blood_type, Accepted, Distance, Donor_id) VALUES('%s', NULL, '%s', '%s', '%s', 0, %f, NULL)" % (
             row["Order_id"], row["Order_date"], row["Hospital_id"], row["Blood_type"], row["dist"])
 
         print(query)
