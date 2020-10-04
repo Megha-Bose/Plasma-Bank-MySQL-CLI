@@ -80,3 +80,30 @@ def updateStaff(cur,con):
 		print(">>>>>>>>>>>>>", e)
 
 	return
+
+
+def updateVehAv(cur,con):
+		
+	try:
+		value=0
+		row = {}
+			
+		while(value==0):
+			row["vid"] = input("Enter vehicle id of vehicle where availability needs to be changed: ")
+			que = "SELECT * FROM LOGISTICS WHERE Vehicle_id LIKE '%s'" % (row["vid"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid vehicle id")
+			con.commit()			
+		cha = bool(input("Enter new availability (1/0): "))
+		query = "UPDATE LOGISTICS SET Availability = '%b' WHERE Vehicle_id LIKE '%s'" % (cha, row["vid"])
+		cur.execute(query)
+		con.commit()	        
+		print("Updated Database")
+
+	except Exception as e:
+			con.rollback()
+			print("Failed to update staff")
+			print(">>>>>>>>>>>>>", e)
+
+	return
