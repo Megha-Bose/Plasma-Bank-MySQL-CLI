@@ -49,6 +49,8 @@ def staffOpt(cur,con):
     	return
     elif ch==1:
         addVehi(cur, con)	
+    elif ch==2:
+        updateVehAv(cur, con)
 
 def donorOpt(cur,con):
     print("1. Plasma sample details") # based on donor id
