@@ -267,3 +267,11 @@ def placeOrder(cur,con):
         print(query)
         cur.execute(query)
         con.commit()
+        print("Inserted Into Database")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print(">>>>>>>>>>>>>", e)
+
+    return
