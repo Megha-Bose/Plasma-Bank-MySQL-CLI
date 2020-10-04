@@ -239,12 +239,11 @@ def placeOrder(cur,con):
         row["dist"] = float(input("Hospital Distance from plasma bank: "))
         row["Login_id"] = "HOSP"+row["Hospital_id"]
         newUser(cur,con,row["Login_id"])
-        
+      
         query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
             row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
         cur.execute(query)
         con.commit()
-
         row["Patient_id"] = input("Patient ID: ")
         name = (input("Name (Fname Lname): ")).split(' ')
         row["Fname"] = name[0]
@@ -254,7 +253,6 @@ def placeOrder(cur,con):
 
         query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', 28)" % (
             row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"])
-
         print(query)
         cur.execute(query)
         con.commit()
@@ -267,8 +265,7 @@ def placeOrder(cur,con):
         print(query)
         cur.execute(query)
         con.commit()
-        print("Inserted Into Database")
-
+        
     except Exception as e:
         con.rollback()
         print("Failed to insert into database")
