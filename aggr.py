@@ -7,7 +7,7 @@ def donorMaxDons(cur,con):
 	try:
 		query = "SELECT * FROM DONOR WHERE Number_of_donations IN (SELECT MAX(Number_of_donations) FROM DONOR) "
 		if cur.execute(query):
-			print(cur.fetchall(query))
+			print(cur.fetchall())
 		con.commit()
 
 	except Exception as e:
@@ -21,7 +21,8 @@ def avgSal(cur,con):
 	try:
 		query = "SELECT AVG(Salary) FROM STAFF"
 		if cur.execute(query):
-			print(cur.fetchall(query))
+			averagesal = cur.fetchall()
+			print(averagesal)
 		con.commit()
 
 	except Exception as e:
@@ -36,7 +37,7 @@ def avgDons(cur,con):
 		year = int(input("Enter year for which you want to see average number of donations per month: "))
 		query = "SELECT AVG(num) WHERE num IN (SELECT COUNT(*),MONTH(Donation_date) AS num FROM PLASMA WHERE YEAR(Donation_date) = '%d' GROUP BY MONTH(Donation_date))"(year)
 		if cur.execute(query):
-			print(cur.fetchall(query))
+			print(cur.fetchall())
 		con.commit()
 
 	except Exception as e:
@@ -51,7 +52,7 @@ def avgOrders(cur,con):
 		year = int(input("Enter year for which you want to see average number of orders placed per month: "))
 		query = "SELECT AVG(num) WHERE num IN (SELECT COUNT(Order_id),MONTH(Order_date) AS num FROM ORDER_REQUEST WHERE YEAR(Order_date) = '%d' GROUP BY MONTH(Order_date))"(year)
 		if cur.execute(query):
-			print(cur.fetchall(query))
+			print(cur.fetchall())
 		con.commit()
 
 	except Exception as e:
