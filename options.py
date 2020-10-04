@@ -42,7 +42,9 @@ def staffOpt():
     print("16. Logout")
     ch = int(input("Enter choice> "))
     if ch==16:
-    	return	
+    	return
+    elif ch==1:
+        addVehi(cur, con)	
 
 def donorOpt():
     print("1. Plasma sample details") # based on donor id

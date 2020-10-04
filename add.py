@@ -1,14 +1,14 @@
-def hireStaff(cur,con):
-    """
+"""
     This is a sample function implemented for the refrence.
     This example is related to the Employee Database.
     In addition to taking input, you are required to handle domain errors as well
     For example: the SSN should be only 9 characters long
     If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
     HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
-    """
+"""
+
+def hireStaff(cur,con):
     try:
-        # Takes emplyee details as input
         row = {}
         print("Enter new staff's details: ")
         row["Staff_id"] = input("Staff ID: ")
@@ -30,7 +30,7 @@ def hireStaff(cur,con):
         query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %f, '%s', %s, '%s', 28)" % (
             row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["login_id"])
 
-        #print(query)
+        print(query)
         cur.execute(query)
         con.commit()
 
@@ -51,7 +51,6 @@ def hireStaff(cur,con):
 
 def addDep(cur,con):
     try:
-        # Takes emplyee details as input
         row = {}
         print("Enter new dependent's details: ")
         row["Staff_id"] = input("Staff ID: ")
@@ -68,6 +67,32 @@ def addDep(cur,con):
         print(query)
         cur.execute(query)
         con.commit()
+        print("Inserted Into Database")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print(">>>>>>>>>>>>>", e)
+
+    return
+    
+def addVehi(cur,con):
+    try:
+        row = {}
+        print("Enter new vehicle's details: ")
+        row["Vehicle_id"] = input("Vehicle ID: ")
+        row["Vehicle_type"] = input("Vehicle_type (HCV, LCV, Two-wheeler, Car): ")
+        row["Availability"] = int(input("Vehicle Availability (1, 0): "))
+        row["Deliveries"] = 0
+        row["Department_id"] = input("Department_id: ")
+
+        query = "INSERT INTO LOGISTICS(Vehicle_id, Vehicle_type, Availability, Deliveries, Department_id) VALUES('%s', '%s', '%d', '%d', %s)" % (
+            row["Vehicle_id"], row["Vehicle_type"], row["Availability"], row["Deliveries"], row["Department_id"])
+
+        print(query)
+        cur.execute(query)
+        con.commit()
+
         print("Inserted Into Database")
 
     except Exception as e:
