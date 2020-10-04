@@ -85,22 +85,45 @@ def placeOrder(cur,con):
             return
         else:
 
-            """
-            UPDATE THE INVENTORY SPECIFIED BY inventory_id AND USED STATUS OF PLASMA
-            """
+            #UPDATE THE INVENTORY SPECIFIED BY inventory_id 
+            if row["Blood_type"] == "A+":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Aplus = No_of_Aplus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "A-":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Aminus = No_of_Aminus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "B+":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Bplus = No_of_Bplus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "B-":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Bminus = No_of_Bminus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "O+":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Oplus = No_of_Oplus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "O-":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_Ominus = No_of_Ominus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "AB+":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_ABplus = No_of_ABplus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            if row["Blood_type"] == "AB-":
+                que = "UPDATE PLASMA_INVENTORY SET No_of_ABminus = No_of_ABminus - 1, Vacancy = Vacancy + 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+            cur.execute(que)
+            con.commit()
 
-            """
-            UPDATE THE NUMBER OF DONATIONS FOR DONOR WHOSE PLASMA SAMPLE U MARKED AS USED ABOVE
-            store donor_id in "donor_id" variable pls
-            """
+            #UPDATE USED STATUS OF PLASMA
+            query3 = "SELECT Donor_id FROM PLASMA WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id IN (SELECT Donor_id FROM DONOR WHERE Blood_type LIKE '%s')" %(inventory_id, row["Blood_type"])
+            if cur.execute(query3):
+                donor_id = cur.fetchall();
+            con.commit()
+
+            query2 = "UPDATE PLASMA SET Used = 1 WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id LIKE '%s'" %(inventory_id, donor_id)
+
+            cur.execute(query2)
+            con.commit()
+        
                 
-            """
-            if vehicle_id not equal to 'NULL' then,
-            UPDATE VEHICLE AVAILABILITY AND NUMBER OF DELIVERIES FOR VEHICLE WITH ID vehicle_id
-            """
+            #if vehicle_id not equal to 'NULL' then   UPDATE VEHICLE AVAILABILITY AND NUMBER OF DELIVERIES FOR VEHICLE WITH ID vehicle_id
+            
+            query4 = "UPDATE LOGISTICS SET Availability = 0, Deliveries = Deliveries + 1 WHERE Vehicle_id LIKE '%s'" % (vehicle_id)
+            cur.execute(query4)
+            con.commit()
 
-            query = "INSERT INTO SUPPLY (Order_id,Donor_id,Vehicle_id,Inventory_id) VALUES ('%s', '%s', '%s', '%s')" %(
-                row["Order_id"],onor_id, vehicle_id, inventory_id)
+            query = "INSERT INTO SUPPLY (Order_id,Donor_id,Vehicle_id,Inventory_id) VALUES ('%s', '%s', '%s', '%s')" %(row["Order_id"],donor_id, vehicle_id, inventory_id)
             cur.execute(query)
             con.commit()
             print("Order confirmed Thank you!")
