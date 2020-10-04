@@ -5,6 +5,8 @@ import add
 from add import * 
 import updating
 from updating import *
+import delete
+from delete import *
 
 def adminOpt(cur, con):
     while(1):
@@ -47,6 +49,8 @@ def staffOpt(cur,con):
     ch = int(input("Enter choice> "))
     if ch==16:
     	return
+    elif ch==8:
+        addDonor(cur,con)
     elif ch==1:
         addVehi(cur, con)	
     elif ch==2:
