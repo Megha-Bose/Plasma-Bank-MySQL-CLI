@@ -21,6 +21,11 @@ import getby
 from getby import *
 import adminOptions
 from adminOptions import *
+import retrieve_id
+from retrieve_id import *
+import retrieve_other
+from retrieve_other import *
+
 
 
 def adminOpt(cur,con,loginid):
@@ -33,9 +38,10 @@ def adminOpt(cur,con,loginid):
         print("6. Manage vehicles")
         print("7. Get information")
         print("8. Add hospital")
-        print("9. Logout")
+        print("9. Show all details")
+        print("10. Logout")
         ch = int(input("Enter choice> "))
-        if ch==9:
+        if ch==10:
             return
         elif ch==1:
             manageStaff(cur, con)
@@ -53,6 +59,8 @@ def adminOpt(cur,con,loginid):
             getInfo(cur, con)
         elif ch==8:
             addHosp(cur, con)
+        elif ch==9:
+            showAllDetails(cur, con)
         else:
             print("Invalid choice")
         
