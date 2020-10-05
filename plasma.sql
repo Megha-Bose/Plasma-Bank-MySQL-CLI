@@ -88,7 +88,8 @@ CREATE TABLE `DONOR` (
   `Login_id` varchar(50) NOT NULL,
   PRIMARY KEY (`Donor_id`),
   KEY `Login_id` (`Login_id`),
-  CONSTRAINT `DONOR_ibfk_1` FOREIGN KEY (`Login_id`) REFERENCES `USER` (`Login_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `DONOR_ibfk_1` FOREIGN KEY (`Login_id`) REFERENCES `USER` (`Login_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `DONOR_chk_1` CHECK ((`Age` >= 18))
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -484,4 +485,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-04 19:11:07
+-- Dump completed on 2020-10-05 14:50:34
