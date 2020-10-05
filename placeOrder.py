@@ -49,7 +49,7 @@ def placeOrder(cur,con):
         #row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         bdate = row["Bdate"].split('-')
-        row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
+        row["Age"] = calcAge(int(date(bdate[0]),int(bdate[1]),int(bdate[2])))
         query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
             row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
 
