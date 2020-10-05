@@ -121,4 +121,5 @@ def getInfo(cur, con):
                 getDonorOrder(cur, con)
         elif ch==17:
                 getOrderVehicle(cur, con)
-        #elif ch==18:
+        elif ch==18:
+                getDonAge(cur,con)
