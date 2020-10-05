@@ -192,8 +192,9 @@ def updateDonor(cur,con):
 		
 		cha = int(input("Blood_type (1/0) : "))
 		if cha == 1:
+
 			x = 1
-        	while(x):
+			while(x):
 				row["Newb"] = input("Enter new Blood_type : ")
 				if row["Newb"] in ["A+","A-","B+","B-","O+","O-","AB+","AB-"]:
 					x=0
