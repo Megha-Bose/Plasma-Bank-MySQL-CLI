@@ -66,12 +66,7 @@ def placeOrder(cur,con):
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         bdate = row["Bdate"].split('-')
         row["Age"] = calcAge(int(date(bdate[0]),int(bdate[1]),int(bdate[2])))
-        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
-            row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
+        allergies = (input("Patient allergies (comma separated): ")).split(',')
 
         row["Order_id"] = input("Order ID:")
         row["Order_date"] = (input("Order date: "))
@@ -82,7 +77,19 @@ def placeOrder(cur,con):
         cur.execute(query)
         con.commit()
 
-        print("Inserted Into Database")
+        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
+            row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
+
+        print(query)
+        cur.execute(query)
+        con.commit()
+        
+        for allergy in allergies:
+            query = "INSERT INTO PATIENT_ALLERGIES(Hospital_id, Patient_id, Skills) VALUES('%s','%s','%s')"%(row["Hospital_id"], row["Staff_id"],skill)
+            cur.execute(query)
+            con.commit()
+
+        print("Registered your request")
 
         #check plasma inventory 
         if row["Blood_type"] == "A+":

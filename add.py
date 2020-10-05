@@ -23,6 +23,13 @@ def hireStaff(cur,con):
         row["Login_id"] = "STAFF"+row["Staff_id"]
         
         row["doj"] = input("Date of joining (YYYY-MM-DD): ")
+        row["dep"] = input("Department ID:")
+        query = "SELECT *FROM DEPARTMENT WHERE Department_id LIKE '%s'"%(roq["dep"])
+        if(cur.execute(query)==0):
+            con.commit()
+            print("wrong department id entered")
+            return
+        con.commit()
         row["Salary"] = int(input("Salary: "))
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["sup"] = input("Supervisor staff ID: ")
@@ -40,6 +47,7 @@ def hireStaff(cur,con):
         """
         row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
 
+
         newUser(cur,con,row["Login_id"])
         
         #print(row["Age"])
@@ -48,6 +56,11 @@ def hireStaff(cur,con):
 
         #print(query)
         cur.execute(query)
+        con.commit()
+
+        query = "INSERT INTO WORKS_FOR(Department_id,Staff_id) VALUES('%s','%s')" %(row["dep"], row["Staff_id"])
+        cur.execute(query)
+        con.commit()
 
         skills = (input("Skills (comma separated): ")).split(',')
         for skill in skills:
