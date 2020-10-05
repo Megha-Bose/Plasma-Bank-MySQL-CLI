@@ -68,7 +68,7 @@ def invStaffOpt(cur,con,loginid):
         print("9. Logout")
         ch = int(input("Enter choice> "))
         if ch==9:
-    	   return
+            return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
@@ -100,7 +100,7 @@ def logStafOpt(cur,con,loginid):
         print("6. Logout")
         ch = int(input("Enter choice> "))
         if ch==6:
-    	   return
+            return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
@@ -134,7 +134,7 @@ def donorOpt(cur,con,loginid):
         print("3. Logout")
         ch = int(input("Enter choice> "))
         if ch==3:
-    	   return
+            return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
@@ -151,7 +151,7 @@ def hospOpt(cur,con,loginid):
         print("3. Logout")
         ch = int(input("Enter choice> "))
         if ch==3:
-    	   return
+            return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:

@@ -1,3 +1,20 @@
+from datetime import date 
+
+def calcAge(bdate): 
+    today = date.today() 
+    try:  
+        birthday = bdate.replace(year = today.year) 
+  
+    # raised when birth date is February 29 
+    # and the current year is not a leap year 
+    except ValueError:  
+        birthday = bdate.replace(year = today.year, 
+                  month = bdate.month + 1, day = 1) 
+  
+    if birthday > today: 
+        return today.year - bdate.year - 1
+    else: 
+        return today.year - bdate.year 
 
 def placeOrder(cur,con):
     try:
@@ -20,9 +37,10 @@ def placeOrder(cur,con):
         row["Lname"] = name[1]
         row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
-
-        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', 28)" % (
-            row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"])
+        bdate = row["Bdate"].split('-')
+        row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
+        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
+            row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
 
         print(query)
         cur.execute(query)

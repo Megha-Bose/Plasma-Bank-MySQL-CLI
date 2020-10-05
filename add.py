@@ -7,6 +7,9 @@
     HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
 """
 
+from datetime import date 
+import placeOrder
+from placeOrder import calcAge
 
 def newUser(cur,con,login):
     
@@ -44,8 +47,11 @@ def hireStaff(cur,con):
         else:
             row["sup"]= "'"+row["sup"]+"'"
         
-        query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %f, '%s', %s, '%s', 28)" % (
-            row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["Login_id"])
+        bdate = row["Bdate"].split('-')
+        row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
+
+        query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %f, '%s', %s, '%s', %d)" % (
+            row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["Login_id"], row["Age"])
 
         print(query)
         cur.execute(query)
