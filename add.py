@@ -10,21 +10,7 @@
 from datetime import date 
 import placeOrder
 from placeOrder import calcAge
-
-def newUser(cur,con,login):
-    
-    row={}
-    row["Password"] = input("Login Password: ")
-    row["Contact"] = int(input("Contact Number: "))
-    row["Address"] = input("Address: ")
-
-    query = "INSERT INTO USER(Login_id, Password, Contact, Address) VALUES('%s', '%s', '%d', '%s')" % (
-            login, row["Password"], row["Contact"], row["Address"])
-
-#    print(query)
-    cur.execute(query)
-    con.commit()
-
+from placeOrder import newUser
 
 def hireStaff(cur,con):
     try:
@@ -60,7 +46,6 @@ def hireStaff(cur,con):
 
         #print(query)
         cur.execute(query)
-        con.commit()
 
         skills = (input("Skills (comma separated): ")).split(',')
         for skill in skills:
@@ -72,6 +57,15 @@ def hireStaff(cur,con):
 
     except Exception as e:
         con.rollback()
+        try:
+            query1 = "SELECT Staff_id FROM USER LEFT JOIN STAFF ON USER.Login_id=STAFF.Login_id WHERE USER.Login_id LIKE '%s'" %(row["Login_id"])
+            if(cur.execute(query1)>0):
+                con.commit()
+                if cur.fetchall()[0][0]=='NULL':
+                    delUser(cur,con,row["Login_id"])
+        except Exception as e:
+            con.rollback()
+            print("query failed")
         print("Failed to insert into database")
         print(">>>>>>>>>>>>>", e)
 
@@ -111,6 +105,15 @@ def addDonor(cur,con):
 
     except Exception as e:
         con.rollback()
+        try:
+            query1 = "SELECT Donor_id FROM USER LEFT JOIN STAFF ON USER.Login_id=STAFF.Login_id WHERE USER.Login_id LIKE '%s'" %(row["Login_id"])
+            if(cur.execute(query1)>0):
+                con.commit()
+                if cur.fetchall()[0][0]=='NULL':
+                    delUser(cur,con,row["Login_id"])
+        except Exception as e:
+            con.rollback()
+            print("query failed")
         print("Failed to insert into database")
         print(">>>>>>>>>>>>>", e)
 
@@ -281,3 +284,27 @@ def addInventory(cur, con):
 
     return
 
+def addHosp(cur,con):
+    try:
+        
+        row = {}
+        print("Enter new hospital details: ")
+        row["Hospital_id"] = input("Hospital ID: ")
+        row["name"] = (input("Hospital Name: "))
+        row["dist"] = float(input("Hospital Distance from plasma bank: "))
+        row["Login_id"] = "HOSP"+row["Hospital_id"]
+        newUser(cur,con,row["Login_id"])
+        
+        query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
+            row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
+        cur.execute(query)
+        con.commit()
+
+        print("Inserted Into Database")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print(">>>>>>>>>>>>>", e)
+
+    return

@@ -1,3 +1,6 @@
+import placeOrder
+from placeOrder import calcAge
+
 def updateStaff(cur,con):
 	
 	try:
@@ -24,6 +27,8 @@ def updateStaff(cur,con):
 			
 			#print(value)
 			con.commit()
+		elif cha != 0:
+			print("Enter 0 or 1")
 		
 		cha = int(input("Last name (1/0) : "))
 		if cha == 1:
@@ -34,10 +39,13 @@ def updateStaff(cur,con):
 	
 		cha = int(input("Birth date (1/0) : "))
 		if cha == 1:
-			row["Newbd"] = input("Enter new Birth date : ")
-			query = "UPDATE STAFF SET Birth_date = '%s', Age = 28 WHERE Staff_id LIKE '%s'" % (row["Newbd"], row["sid"])
+			row["Newbd"] = input("Enter new Birth date (YYYY-MM-DD) : ")
+			bdate = row["Newbd"].split('-')
+			row["Age"] = calcAge(int(bdate[0]),int(bdate[1]), int(bdate[2]))
+			query = "UPDATE STAFF SET Birth_date = '%s', Age = %d WHERE Staff_id LIKE '%s'" % (row["Newbd"], row["Age"], row["sid"])
 			cur.execute(query)
 			con.commit()
+
 		
 		cha = int(input("Salary (1/0) : "))
 		if cha == 1:
@@ -214,7 +222,9 @@ def updateDonor(cur,con):
 			cha = int(input("Birth date (1/0) : "))
 		if cha == 1:
 			row["Newbd"] = input("Enter new Birth date : ")
-			query = "UPDATE DONOR SET Birth_date = '%s', Age = 28 WHERE Donor_id LIKE '%s'" % (row["Newbd"], row["sid"])
+			bdate = row["Newbd"].split('-')
+			row["Age"] = calcAge(int(bdate[0]),int(bdate[1]), int(bdate[2]))
+			query = "UPDATE DONOR SET Birth_date = '%s', Age = %d WHERE Donor_id LIKE '%s'" % (row["Newbd"], row["Age"], row["did"])
 			cur.execute(query)
 			con.commit()
 	

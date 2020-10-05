@@ -1,5 +1,21 @@
 from datetime import date 
 
+
+def newUser(cur,con,login):
+    
+    row={}
+    row["Password"] = input("Login Password: ")
+    row["Contact"] = int(input("Contact Number: "))
+    row["Address"] = input("Address: ")
+
+    query = "INSERT INTO USER(Login_id, Password, Contact, Address) VALUES('%s', '%s', '%d', '%s')" % (
+            login, row["Password"], row["Contact"], row["Address"])
+
+#    print(query)
+    cur.execute(query)
+    con.commit()
+
+
 def calcAge(bDate): 
     today = date.today() 
     age = today.year - bDate.year - ((today.month, today.day) < (bDate.month, bDate.day)) 
