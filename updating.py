@@ -66,8 +66,8 @@ def updateStaff(cur,con):
 			row["Newsup"] = input("Enter new Supervisor : ")
 			if row["Newsup"]=='' or row["Newsup"]=='NULL':
 				row["Newsup"]='NULL'
-			else:
-				row["Newsup"]= "'"+row["Newsup"]+"'"
+			# else:
+			# 	row["Newsup"]= "'"+row["Newsup"]+"'"
 			query = "UPDATE STAFF SET Supervisor = '%s' WHERE Staff_id LIKE '%s'" % (row["Newsup"], row["sid"])
 			cur.execute(query)
 			con.commit()
@@ -143,8 +143,8 @@ def updateDept(cur,con):
 			row["Newdes"] = input("Enter new description : ")
 			if row["Newdes"]=='' or row["Newdes"]=='NULL':
 				row["Newdes"]='NULL'
-			else:
-				row["Newdes"]= "'"+row["Newdes"]+"'"
+			# else:
+			# 	row["Newdes"]= "'"+row["Newdes"]+"'"
 			query = "UPDATE DEPARTMENT SET Description = '%s' WHERE Department_id LIKE '%s'" % (row["Newdes"], row["did"])
 			cur.execute(query)
 			con.commit()
@@ -154,8 +154,8 @@ def updateDept(cur,con):
 			row["Newrem"] = input("Enter new remarks : ")
 			if row["Newrem"]=='' or row["Newrem"]=='NULL':
 				row["Newrem"]='NULL'
-			else:
-				row["Newrem"]= "'"+row["Newrem"]+"'"
+			# else:
+			# 	row["Newrem"]= "'"+row["Newrem"]+"'"
 			query = "UPDATE DEPARTMENT SET Remarks = '%s' WHERE Department_id LIKE '%s'" % (row["Newrem"], row["did"])
 			cur.execute(query)
 			con.commit()
