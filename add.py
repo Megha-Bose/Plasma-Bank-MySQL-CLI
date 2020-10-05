@@ -74,6 +74,7 @@ def hireStaff(cur,con):
 
 def addDonor(cur,con):
     try:
+        
         row = {}
         print("Enter new donor's details: ")
         row["Donor_id"] = input("Donor ID: ")
@@ -82,7 +83,13 @@ def addDonor(cur,con):
         newUser(cur,con,row["Login_id"])
         
         row["aadhar"] = int(input("Aadhar Number: "))
-        row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
+        x = 1
+        while(x):
+            row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
+            if row["Blood_type"] in ["A+","A-","B+","B-","O+","O-","AB+","AB-"]:
+                x=0
+            else:
+                print("Invalid blood_type")
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["noDon"] = int(input("Number of donations: "))
 

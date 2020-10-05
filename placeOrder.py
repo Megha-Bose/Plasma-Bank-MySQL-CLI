@@ -35,7 +35,15 @@ def placeOrder(cur,con):
         name = (input("Name (Fname Lname): ")).split(' ')
         row["Fname"] = name[0]
         row["Lname"] = name[1]
-        row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
+
+        x = 1
+        while(x):
+            row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
+            if row["Blood_type"] in ["A+","A-","B+","B-","O+","O-","AB+","AB-"]:
+                x=0
+            else:
+                print("Invalid blood_type")
+        #row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         bdate = row["Bdate"].split('-')
         row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
