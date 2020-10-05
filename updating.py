@@ -88,8 +88,15 @@ def updateVehAv(cur,con):
 			value = cur.execute(que)
 			if value == 0:
 				print("Invalid vehicle id")
-			con.commit()			
-		cha = bool(input("Enter new availability (1/0): "))
+			con.commit()	
+		x = 1
+		while(x):
+			cha = bool(input("Enter new availability (1/0): "))
+			if cha in [1, 0]:
+				x=0
+			else:
+				print("Please enter 0 or 1")		
+		
 		query = "UPDATE LOGISTICS SET Availability = '%b' WHERE Vehicle_id LIKE '%s'" % (cha, row["vid"])
 		cur.execute(query)
 		con.commit()	        
@@ -182,10 +189,17 @@ def updateDonor(cur,con):
 			query = "UPDATE DONOR SET Aadhar_num = '%d' WHERE Donor_id LIKE '%s'" % (row["Newnum"], row["did"])
 			cur.execute(query)
 			con.commit()
-	
+		
 		cha = int(input("Blood_type (1/0) : "))
 		if cha == 1:
-			row["Newb"] = input("Enter new Blood_type : ")
+
+			x = 1
+			while(x):
+				row["Newb"] = input("Enter new Blood_type : ")
+				if row["Newb"] in ["A+","A-","B+","B-","O+","O-","AB+","AB-"]:
+					x=0
+				else:
+					print("Invalid blood type")
 			query = "UPDATE DONOR SET Blood_type = '%s' WHERE Donor_id LIKE '%s'" % (row["Newb"], row["did"])
 			cur.execute(query)
 			con.commit()

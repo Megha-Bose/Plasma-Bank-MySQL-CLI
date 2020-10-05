@@ -88,13 +88,15 @@ def addDonor(cur,con):
         newUser(cur,con,row["Login_id"])
         
         row["aadhar"] = int(input("Aadhar Number: "))
+
         x = 1
         while(x):
             row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
             if row["Blood_type"] in ["A+","A-","B+","B-","O+","O-","AB+","AB-"]:
                 x=0
             else:
-                print("Invalid blood_type")
+                print("Invalid blood type")
+
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["noDon"] = int(input("Number of donations: "))
 
@@ -122,7 +124,15 @@ def addDep(cur,con):
         name = (input("Name (Fname Lname): ")).split(' ')
         row["Fname"] = name[0]
         row["Lname"] = name[1]
-        row["gend"] = input("Gender (F,M,T,O): ")
+
+        x = 1
+        while(x):
+            row["gend"] = input("Gender (F,M,T,O): ")
+            if row["gend"] in ["F","M","T","O"]:
+                x=0
+            else:
+                print("Invalid gender input")
+
         row["rel"] = input("Relationship: ")
         row["age"] = int(input("Age: "))
 
@@ -146,8 +156,23 @@ def addVehi(cur,con):
         row = {}
         print("Enter new vehicle's details: ")
         row["Vehicle_id"] = input("Vehicle ID: ")
-        row["Vehicle_type"] = input("Vehicle_type (HCV, LCV, Two-wheeler, Car): ")
-        row["Availability"] = int(input("Vehicle Availability (1, 0): "))
+
+        x = 1
+        while(x):
+            row["Vehicle_type"] = input("Vehicle_type (HCV, LCV, Two-wheeler, Car): ")
+            if row["Vehicle_type"] in ["HCV","LCV","Two-wheeler","Car"]:
+                x=0
+            else:
+                print("Invalid vehicle type")
+
+        x = 1
+        while(x):
+            row["Availability"] = int(input("Vehicle Availability (1, 0): "))
+            if row["Availability"] in [1, 0]:
+                x=0
+            else:
+                print("Please enter 0 or 1")
+
         row["Deliveries"] = int(input("Number of deliveries: "))
         row["Department_id"] = input("Department_id: ")
 
@@ -173,7 +198,14 @@ def addPlasma(cur, con):
         print("Enter plasma details: ")
         row["Donor_id"] = input("Donor ID: ")
         row["Donation_date"] = input("Donation date: ")
-        row["Sample_no"] = int(input("Sample number (1, 2): "))
+        
+        x = 1
+        while(x):
+            row["Sample_no"] = int(input("Sample number (1, 2): "))
+            if row["Sample_no"] in [1, 2]:
+                x=0
+            else:
+                print("Please enter 1 or 2")
         
         query1 = "SELECT Inventory_id FROM PLASMA_INVENTORY WHERE Vacancy>0"
 
