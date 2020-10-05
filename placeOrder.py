@@ -1,8 +1,11 @@
 from datetime import date 
 
-def calcAge(bdate): 
+def calcAge(bDate): 
     today = date.today() 
-    try:  
+    age = today.year - bDate.year - ((today.month, today.day) < (bDate.month, bDate.day)) 
+  
+    return age 
+    """try:  
         birthday = bdate.replace(year = today.year) 
   
     # raised when birth date is February 29 
@@ -15,7 +18,7 @@ def calcAge(bdate):
         return today.year - bdate.year - 1
     else: 
         return today.year - bdate.year 
-
+    """
 def placeOrder(cur,con):
     try:
         row = {}

@@ -38,7 +38,7 @@ def hireStaff(cur,con):
         newUser(cur,con,row["Login_id"])
         
         row["doj"] = input("Date of joining (YYYY-MM-DD): ")
-        row["Salary"] = float(input("Salary: "))
+        row["Salary"] = int(input("Salary: "))
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["sup"] = input("Supervisor staff ID: ")
 
@@ -48,12 +48,17 @@ def hireStaff(cur,con):
             row["sup"]= "'"+row["sup"]+"'"
         
         bdate = row["Bdate"].split('-')
-        row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
-
-        query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %f, '%s', %s, '%s', %d)" % (
+        """
+        print(bdate[0])
+        print(bdate[1])
+        print(bdate[2])
+        """
+        row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
+        #print(row["Age"])
+        query = "INSERT INTO STAFF(First_name, Last_name, Staff_id, Birth_date, Salary, Date_of_joining, Supervisor, Login_id, Age) VALUES('%s', '%s', '%s', '%s', %d, '%s', %s, '%s', %d)" % (
             row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["Login_id"], row["Age"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
