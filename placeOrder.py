@@ -123,6 +123,11 @@ def placeOrder(cur,con):
             cur.execute(query4)
             con.commit()
 
+            #update order
+            query5 = "UPDATE ORDER_REQUEST SET Vehicle_id = '%s', Accepted = 1, Donor_id = '%s' WHERE Order_id LIKE '%s'" %(vehicle_id, donor_id, row["Order_id"])
+            cur.execute(query5)
+            con.commit
+
             query = "INSERT INTO SUPPLY (Order_id,Donor_id,Vehicle_id,Inventory_id) VALUES ('%s', '%s', '%s', '%s')" %(row["Order_id"],donor_id, vehicle_id, inventory_id)
             cur.execute(query)
             con.commit()
