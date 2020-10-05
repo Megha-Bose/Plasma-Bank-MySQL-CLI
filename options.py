@@ -32,9 +32,10 @@ def adminOpt(cur,con,loginid):
         print("5. Manage donor")
         print("6. Manage vehicles")
         print("7. Get information")
-        print("8. Logout")
+        print("8. Add hospital")
+        print("9. Logout")
         ch = int(input("Enter choice> "))
-        if ch==8:
+        if ch==9:
             return
         elif ch==1:
             manageStaff(cur, con)
@@ -50,6 +51,8 @@ def adminOpt(cur,con,loginid):
             manageVeh(cur, con)
         elif ch==7:
             getInfo(cur, con)
+        elif ch==8:
+            addHosp(cur, con)
         else:
             print("Invalid choice")
         
@@ -65,9 +68,10 @@ def invStaffOpt(cur,con,loginid):
         print("6. Add plasma sample")
         print("7. Get Plasma samples")
         print("8. Update department")
-        print("9. Logout")
+        print("9. Add hospital")
+        print("10. Logout")
         ch = int(input("Enter choice> "))
-        if ch==9:
+        if ch==10:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
@@ -85,6 +89,8 @@ def invStaffOpt(cur,con,loginid):
             getPlasma(cur, con)
         elif ch==8:
             updateDept(cur, con)
+        elif ch==9:
+            addHosp(cur, con)
         else:
             print("Invalid choice")
     
@@ -155,7 +161,7 @@ def hospOpt(cur,con,loginid):
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
-            placeOrder(cur, con)
+            placeOrder(cur, con, loginid)
         else:
             print("Invalid choice")
     

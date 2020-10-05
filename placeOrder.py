@@ -35,20 +35,21 @@ def calcAge(bDate):
     else: 
         return today.year - bdate.year 
     """
-def placeOrder(cur,con):
+def placeOrder(cur,con, loginid):
     try:
         row = {}
+        row["Hospital_id"] = loginid[4:len(loginid)]
         print("Enter details to place order: ")
-        row["Hospital_id"] = input("Hospital ID:")
-        row["name"] = (input("Hospital Name: "))
-        row["dist"] = float(input("Hospital Distance from plasma bank: "))
-        row["Login_id"] = "HOSP"+row["Hospital_id"]
-        newUser(cur,con,row["Login_id"])
+        # row["Hospital_id"] = input("Hospital ID:")
+        # row["name"] = (input("Hospital Name: "))
+        # row["dist"] = float(input("Hospital Distance from plasma bank: "))
+        # row["Login_id"] = "HOSP"+row["Hospital_id"]
+        # newUser(cur,con,row["Login_id"])
         
-        query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
-            row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
-        cur.execute(query)
-        con.commit()
+        # query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
+        #     row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
+        # cur.execute(query)
+        # con.commit()
 
         row["Patient_id"] = input("Patient ID: ")
         name = (input("Name (Fname Lname): ")).split(' ')
@@ -65,13 +66,12 @@ def placeOrder(cur,con):
         #row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         bdate = row["Bdate"].split('-')
-        row["Age"] = calcAge(int(date(bdate[0]),int(bdate[1]),int(bdate[2])))
-        query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
+        row["Age"] = calcAge(date(bdate[0],bdate[1],bdate[2]))
+        queryp = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
             row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
 
-        print(query)
-        cur.execute(query)
-        con.commit()
+        #print(query)
+        
 
         row["Order_id"] = input("Order ID:")
         row["Order_date"] = (input("Order date: "))
@@ -80,6 +80,9 @@ def placeOrder(cur,con):
 
         print(query)
         cur.execute(query)
+        con.commit()
+
+        cur.execute(queryp)
         con.commit()
 
         print("Inserted Into Database")
