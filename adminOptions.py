@@ -21,50 +21,74 @@ import getby
 from getby import *
 
 def manageStaff(cur, con):
+    while(1):
         print("1. Hire staff")
         print("2. Update staff")  # Hire an Employee
         print("3. Delete staff")
+        print("4. Exit")
         ch = int(input("Enter choice> "))
         if ch==1:
-                hireStaff(cur, con)
+            hireStaff(cur, con)
         elif ch==2:
-                updateStaff(cur, con)
+            updateStaff(cur, con)
         elif ch==3:
-                delStaff(cur, con)
+            delStaff(cur, con)
+        elif ch==4:
+            return
+        else:
+            print("Invalid choice")
 
 def manageDep(cur, con):
+    while(1):
         print("1. Add dependent of staff")
-        print("2. Delete dependent")  
+        print("2. Delete dependent")
+        print("3. Exit")  
         ch = int(input("Enter choice> "))
         if ch==1:
-                addDep(cur, con)
+            addDep(cur, con)
         elif ch==2:
-                delDep(cur, con)
+            delDep(cur, con)
+        elif ch==3:
+            return
+        else:
+            print("Invalid choice")
 
        
 def manageDonor(cur, con):
+    while(1):
         print("1. Add donor")
         print("2. Update donor")
         print("3. Delete donor")
+        print("4. Exit")
         ch = int(input("Enter choice> "))
         if ch==1:
-                addDonor(cur, con)
+            addDonor(cur, con)
         elif ch==2:
-                updateDonor(cur, con)
+            updateDonor(cur, con)
         elif ch==3:
-                 delDonor(cur, con)
+            delDonor(cur, con)
+        elif ch==4:
+            return
+        else:
+            print("Invalid choice")
 
 def manageVeh(cur, con):
+    while(1):
         print("1. Add vehicle")
         print("2. Update vehicle availability")
         print("3. Delete vehicle")
+        print("4. Exit")
         ch = int(input("Enter choice> "))
         if ch==1:
-                addVehi(cur, con)
+            addVehi(cur, con)
         elif ch==2:
-                updateVehAv(cur, con)
+            updateVehAv(cur, con)
         elif ch==3:
-                delVehi(cur, con)
+            delVehi(cur, con)
+        elif ch==4:
+            return
+        else:
+            print("Invalid choice")
 
 def getInfo(cur, con):
         print("1. View your details")  # view details
@@ -85,41 +109,45 @@ def getInfo(cur, con):
         print("16. Get the donor details for a particular order")
         print("17. Get all successful orders that are completed by a particular vehicle type")
         print("18. Get donors in a particular age group whose plasmas have been successfully delivered to a patient")
-        
+        print("19. Exit")
         ch = int(input("Enter choice> "))
         if ch==1:
-                displayMyDetails(cur, con, loginid)     
+            displayMyDetails(cur, con, loginid)     
         elif ch==2:
-                getStaff(cur, con)
+            getStaff(cur, con)
         elif ch==3:
-                getDonor(cur,con)
+            getDonor(cur,con)
         elif ch==4:
-                getPlasma(cur, con)
+            getPlasma(cur, con)
         elif ch==5:
-                getOrder(cur, con)
+            getOrder(cur, con)
         elif ch==6:
-                getInv(cur, con)
+            getInv(cur, con)
         elif ch==7:
-                getVehi(cur, con)
+            getVehi(cur, con)
         elif ch==8:
-                getDept(cur, con)
+            getDept(cur, con)
         elif ch==9:
-                getDepen(cur, con)
+            getDepen(cur, con)
         elif ch==10:
-                getPatient(cur, con)
+            getPatient(cur, con)
         elif ch==11:
-                avgSal(cur, con)
+            avgSal(cur, con)
         elif ch==12:
-                donorGrtrX(cur,con)
+            donorGrtrX(cur,con)
         elif ch==13:
-                 donorMaxDons(cur,con)
+            donorMaxDons(cur,con)
         elif ch==14:
-                avgDons(cur,con)
+            avgDons(cur,con)
         elif ch==15:
-                avgOrders(cur,con)
+            avgOrders(cur,con)
         elif ch==16:
-                getDonorOrder(cur, con)
+            getDonorOrder(cur, con)
         elif ch==17:
-                getOrderVehicle(cur, con)
+            getOrderVehicle(cur, con)
         elif ch==18:
-                getDonAge(cur,con)
+            getDonAge(cur,con)
+        elif ch==19:
+            return
+        else:
+            print("Invalid choice")
