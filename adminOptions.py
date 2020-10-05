@@ -19,6 +19,15 @@ import analysis
 from analysis import *
 import getby
 from getby import *
+import placeOrder
+from placeOrder import *
+import retrieve_id
+from retrieve_id import *
+import retrieve_other
+from retrieve_other import *
+import showall
+from showall import *
+
 
 def manageStaff(cur, con):
     while(1):
@@ -148,6 +157,36 @@ def getInfo(cur, con):
         elif ch==18:
             getDonAge(cur,con)
         elif ch==19:
+            return
+        else:
+            print("Invalid choice")
+
+def showAllDetails(cur, con):
+    while(1):
+        print("1. Show all plasma")
+        print("2. Show all staff")
+        print("3. Show all donors")
+        print("4. Show all orders")
+        print("5. Show all hospitals")
+        print("6. Show all inventories")
+        print("7. Show all vehicles")
+        print("8. Exit")
+        ch = int(input("Enter choice> "))
+        if ch==1:
+            showAllPLasma(cur, con)
+        elif ch==2:
+            showAllStaff(cur, con)
+        elif ch==3:
+            showAllDonor(cur, con)
+        elif ch==4:
+            showAllOrder(cur, con)
+        elif ch==5:
+            showAllHospital(cur, con)
+        elif ch==6:
+            showAllInv(cur, con)
+        elif ch==7:
+            showAllVehi(cur, con)
+        elif ch==8:
             return
         else:
             print("Invalid choice")
