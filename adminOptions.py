@@ -100,6 +100,7 @@ def manageVeh(cur, con):
             print("Invalid choice")
 
 def getInfo(cur, con, loginid):
+    while(1):
         print("1. View your details")  # view details
         print("2. Get staff")  
         print("3. Get donor")
