@@ -171,15 +171,19 @@ def donorOpt(cur,con,loginid):
 
 def hospOpt(cur,con,loginid):
     while(1):
-        print("1. View my details")
-        print("2. Place order")
-        print("3. Logout")
+        print("1. View our details")
+        print("2. View our patients")
+        print("3. Place order")
+        print("4. Logout")
         ch = int(input("Enter choice> "))
-        if ch==3:
+        if ch==4:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
+            hospid = loginid[8:len(loginid)]
+            retrievePatByHospId(cur,con,hospid)
+        elif ch==3:
             placeOrder(cur, con, loginid)
         else:
             print("Invalid choice")
