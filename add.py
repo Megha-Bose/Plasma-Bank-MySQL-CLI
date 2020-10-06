@@ -80,7 +80,7 @@ def hireStaff(cur,con):
             query1 = "SELECT Staff_id FROM USER LEFT JOIN STAFF ON USER.Login_id=STAFF.Login_id WHERE USER.Login_id LIKE '%s'" %(row["Login_id"])
             if(cur.execute(query1)>0):
                 con.commit()
-                if cur.fetchall()[0][0]=='NULL':
+                if cur.fetchall()[0]['Staff_id']=='NULL':
                     delUser(cur,con,row["Login_id"])
         except Exception as e:
             con.rollback()
@@ -128,7 +128,7 @@ def addDonor(cur,con):
             query1 = "SELECT Donor_id FROM USER LEFT JOIN STAFF ON USER.Login_id=STAFF.Login_id WHERE USER.Login_id LIKE '%s'" %(row["Login_id"])
             if(cur.execute(query1)>0):
                 con.commit()
-                if cur.fetchall()[0][0]=='NULL':
+                if cur.fetchone()['Donor_id']=='NULL':
                     delUser(cur,con,row["Login_id"])
         except Exception as e:
             con.rollback()
@@ -236,7 +236,10 @@ def addPlasma(cur, con):
             print("Add an inventory with vacancy first")
             return
 
-        inventory_id = cur.fetchall()[0][0]
+        inventory_id = cur.fetchone()#[0]#.Inventory_id
+        print(inventory_id)
+        inventory_id = inventory_id['Inventory_id']
+        print(inventory_id)
         con.commit()
         query = "INSERT INTO PLASMA(Donor_id, Donation_date, Sample_no, Used, Inventory_id) VALUES('%s', '%s', %d, 0, '%s')" % (
             row["Donor_id"], row["Donation_date"], row["Sample_no"], inventory_id)
@@ -249,7 +252,7 @@ def addPlasma(cur, con):
         #updating inventory
         que = "SELECT Blood_type FROM DONOR WHERE Donor_id LIKE '%s'" % (row["Donor_id"])     
         if cur.execute(que):
-            btype = cur.fetchall(que)
+            btype = cur.fetchone()['Blood_type']
 
         if btype == "A+":
             quer = "UPDATE PLASMA_INVENTORY SET No_of_Aplus = No_of_Aplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
