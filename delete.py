@@ -2,7 +2,7 @@ def delUser(cur,con,loginid):
     try:
         query = "DELETE FROM USER WHERE Login_id='%s'" % (loginid)
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -22,15 +22,35 @@ def delStaff(cur,con):
         row["Staff_id"] = input("Enter Staff ID to delete: ")
         row["Login_id"] = "STAFF" + row["Staff_id"]
 
+        query = "SELECT * FROM WORKS_FOR WHERE Staff_id='%s'" % (row["Staff_id"])
+        cur.execute(query)
+        result = cur.fetchall()
+        for roww in result:
+            for key, value in roww.items():
+                if key=="Department_id":
+                    row["dep"] = value
+        
+        con.commit()
+
+        query = "UPDATE DEPARTMENT SET No_of_employees=No_of_employees - 1 WHERE Department_id='%s'" % (row["dep"])
+        cur.execute(query)
+        con.commit()
+
+        query = "DELETE FROM WORKS_FOR WHERE Staff_id='%s'" % (row["Staff_id"])
+
+        #print(query)
+        cur.execute(query)
+        con.commit()
+
         query = "DELETE FROM STAFF_SKILLS WHERE Staff_id='%s'" % (row["Staff_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
         query = "DELETE FROM STAFF WHERE Login_id='%s'" % (row["Login_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -52,7 +72,7 @@ def delDonor(cur,con):
 
         query = "DELETE FROM DONOR WHERE Donor_id='%s'" % (row["Donor_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -73,7 +93,7 @@ def delVehi(cur,con):
         
         query = "DELETE FROM LOGISTICS WHERE Vehicle_id='%s'" % (row["Vehicle_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -95,7 +115,7 @@ def delDep(cur,con):
         
         query = "DELETE FROM DEPENDENT WHERE Staff_id='%s' AND First_name='%s' AND Last_name='%s'" % (row["Staff_id"], row["Fname"], row["Lname"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 

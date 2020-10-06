@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: localhost    Database: plasma_bank
+-- Host: 127.0.0.1    Database: plasma
 -- ------------------------------------------------------
--- Server version	8.0.21-0ubuntu0.20.04.4
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `DEPARTMENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DEPARTMENT` (
   `Department_id` varchar(12) NOT NULL,
   `Manager` varchar(12) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `DEPARTMENT` (
 
 LOCK TABLES `DEPARTMENT` WRITE;
 /*!40000 ALTER TABLE `DEPARTMENT` DISABLE KEYS */;
-INSERT INTO `DEPARTMENT` VALUES ('DL','1234','list of vehicles in logistivs dept',2,NULL),('DPI','123','count of samples in each inventory in plasma inventories dept',3,'Good');
+INSERT INTO `DEPARTMENT` VALUES ('DL','1234','list of vehicles in logistivs dept',1,NULL),('DPI','123','count of samples in each inventory in plasma inventories dept',1,'Good');
 /*!40000 ALTER TABLE `DEPARTMENT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,7 +48,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `DEPENDENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DEPENDENT` (
   `Staff_id` varchar(12) NOT NULL,
   `First_name` varchar(50) NOT NULL,
@@ -77,7 +77,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `DONOR`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DONOR` (
   `Donor_id` varchar(12) NOT NULL,
   `Name` varchar(50) NOT NULL,
@@ -110,7 +110,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `HOSPITAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `HOSPITAL` (
   `Hospital_id` varchar(12) NOT NULL,
   `Hospital_name` varchar(300) NOT NULL,
@@ -137,7 +137,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `LOGISTICS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LOGISTICS` (
   `Vehicle_id` varchar(10) NOT NULL,
   `Vehicle_type` varchar(50) NOT NULL,
@@ -167,7 +167,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ORDER_REQUEST`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ORDER_REQUEST` (
   `Order_id` varchar(12) NOT NULL,
   `Blood_type` varchar(5) NOT NULL,
@@ -202,7 +202,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PATIENT`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PATIENT` (
   `Patient_id` varchar(12) NOT NULL,
   `First_name` varchar(50) NOT NULL,
@@ -232,15 +232,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PATIENT_ALLERGIES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PATIENT_ALLERGIES` (
   `Patient_id` varchar(12) NOT NULL,
   `Allergies` varchar(500) NOT NULL,
-  `Hospital_id` varchar(12) NOT NULL,
   PRIMARY KEY (`Patient_id`,`Allergies`),
-  KEY `Hospital_id` (`Hospital_id`),
-  CONSTRAINT `PATIENT_ALLERGIES_ibfk_1` FOREIGN KEY (`Patient_id`) REFERENCES `PATIENT` (`Patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `PATIENT_ALLERGIES_ibfk_2` FOREIGN KEY (`Hospital_id`) REFERENCES `PATIENT` (`Hospital_id`)
+  CONSTRAINT `PATIENT_ALLERGIES_ibfk_1` FOREIGN KEY (`Patient_id`) REFERENCES `PATIENT` (`Patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -259,7 +256,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PLASMA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PLASMA` (
   `Donor_id` varchar(12) NOT NULL,
   `Donation_date` date NOT NULL,
@@ -286,7 +283,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `PLASMA_INVENTORY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PLASMA_INVENTORY` (
   `Inventory_id` varchar(12) NOT NULL,
   `No_of_Aplus` int NOT NULL,
@@ -321,7 +318,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `STAFF`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `STAFF` (
   `Staff_id` varchar(12) NOT NULL,
   `First_name` varchar(50) NOT NULL,
@@ -356,7 +353,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `STAFF_SKILLS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `STAFF_SKILLS` (
   `Staff_id` varchar(12) NOT NULL,
   `Skills` varchar(500) NOT NULL,
@@ -381,7 +378,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `SUPPLY`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SUPPLY` (
   `Order_id` varchar(12) NOT NULL,
   `Donor_id` varchar(12) DEFAULT NULL,
@@ -412,7 +409,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `USER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `USER` (
   `Login_id` varchar(50) NOT NULL,
   `Password` varchar(25) NOT NULL,
@@ -438,7 +435,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `VEHICLE_DETAILS`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VEHICLE_DETAILS` (
   `Vehicle_type` varchar(50) NOT NULL,
   `Max_dist` int NOT NULL,
@@ -462,7 +459,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `WORKS_FOR`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `WORKS_FOR` (
   `Department_id` varchar(12) NOT NULL,
   `Staff_id` varchar(12) NOT NULL,
@@ -478,6 +475,7 @@ CREATE TABLE `WORKS_FOR` (
 
 LOCK TABLES `WORKS_FOR` WRITE;
 /*!40000 ALTER TABLE `WORKS_FOR` DISABLE KEYS */;
+INSERT INTO `WORKS_FOR` VALUES ('DL','2'),('DPI','1');
 /*!40000 ALTER TABLE `WORKS_FOR` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -490,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-06  1:15:11
+-- Dump completed on 2020-10-06 10:31:45

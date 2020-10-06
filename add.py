@@ -24,7 +24,7 @@ def hireStaff(cur,con):
         
         row["doj"] = input("Date of joining (YYYY-MM-DD): ")
         row["dep"] = input("Department ID:")
-        query = "SELECT *FROM DEPARTMENT WHERE Department_id LIKE '%s'"%(roq["dep"])
+        query = "SELECT *FROM DEPARTMENT WHERE Department_id LIKE '%s'"%(row["dep"])
         if(cur.execute(query)==0):
             con.commit()
             print("wrong department id entered")
@@ -55,6 +55,10 @@ def hireStaff(cur,con):
             row["Fname"], row["Lname"], row["Staff_id"], row["Bdate"], row["Salary"], row["doj"], row["sup"], row["Login_id"], row["Age"])
 
         #print(query)
+        cur.execute(query)
+        con.commit()
+
+        query = "UPDATE DEPARTMENT SET No_of_employees=No_of_employees + 1 WHERE Department_id='%s'" % (row["dep"])
         cur.execute(query)
         con.commit()
 
