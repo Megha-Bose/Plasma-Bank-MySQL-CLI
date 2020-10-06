@@ -46,7 +46,8 @@ def displayStaffDetails(cur,con,loginid):
         if cur.execute(query):
             print(cur.fetchall())
             con.commit()
-        query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (loginid)
+        staffid = loginid[5:len(loginid)]
+        query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (staffid)
         if cur.execute(query):
             print(cur.fetchall())
             con.commit()
