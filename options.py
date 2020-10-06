@@ -56,7 +56,7 @@ def adminOpt(cur,con,loginid):
         elif ch==6:
             manageVeh(cur, con)
         elif ch==7:
-            getInfo(cur, con)
+            getInfo(cur, con, loginid)
         elif ch==8:
             addHosp(cur, con)
         elif ch==9:

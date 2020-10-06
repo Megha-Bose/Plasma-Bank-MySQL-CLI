@@ -99,7 +99,7 @@ def manageVeh(cur, con):
         else:
             print("Invalid choice")
 
-def getInfo(cur, con):
+def getInfo(cur, con, loginid):
         print("1. View your details")  # view details
         print("2. Get staff")  
         print("3. Get donor")
