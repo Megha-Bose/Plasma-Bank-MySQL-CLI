@@ -23,7 +23,7 @@ def updateStaff(cur,con):
 		if cha == 1:
 			row["Newfname"] = input("Enter new First name : ")
 			query = "UPDATE STAFF SET First_name = '%s' WHERE Staff_id LIKE '%s'" % (row["Newfname"], row["sid"])
-			#value=cur.execute(query)
+			cur.execute(query)
 			
 			#print(value)
 			con.commit()
@@ -71,7 +71,19 @@ def updateStaff(cur,con):
 			query = "UPDATE STAFF SET Supervisor = '%s' WHERE Staff_id LIKE '%s'" % (row["Newsup"], row["sid"])
 			cur.execute(query)
 			con.commit()
-		
+
+		cha = int(input("Department_id(1/0) : "))
+		if cha == 1:
+			row["Newdeptid"] = input("Enter new Department_id : ")
+			query = "UPDATE WORKS_FOR SET Department_id= '%s' WHERE Staff_id LIKE '%s'" % (row["Newdeptid"], row["sid"])
+			cur.execute(query)
+			con.commit()
+			query1 = "UPDATE DEPARTMENT SET No_of_employees = No_of_employees + 1 WHERE Department_id LIKE '%s'" %(row["Newdeptid"])
+			query2 = "UPDATE DEPARTMENT SET No_of_employees = No_of_employees - 1 WHERE Department_id NOT LIKE '%s'" %(row["Newdeptid"])
+			cur.execute(query1)
+			con.commit()
+			cur.execute(query2)
+			con.commit()
         #ch = int(input("Staff skills (1/0) : "))  
         
 		print("Updated Database")
