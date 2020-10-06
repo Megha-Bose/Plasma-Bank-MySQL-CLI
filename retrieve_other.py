@@ -99,7 +99,7 @@ def retrieveOrderByAccepted(cur,con,accepted):
 
 def retrieveStaffByDeptId(cur,con,deptid):
     try:
-        query = "SELECT * FROM DEPARTMENT WHERE Department_id='%s'" % (deptid)
+        query = "SELECT * FROM STAFF WHERE Department_id='%s'" % (deptid)
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
