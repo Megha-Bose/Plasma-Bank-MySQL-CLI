@@ -50,14 +50,17 @@ def manageStaff(cur, con):
 def manageDep(cur, con):
     while(1):
         print("1. Add dependent of staff")
-        print("2. Delete dependent")
-        print("3. Exit")  
+        print("2. Update dependent")
+        print("3. Delete dependent")
+        print("4. Exit")  
         ch = int(input("Enter choice> "))
         if ch==1:
             addDep(cur, con)
         elif ch==2:
             delDep(cur, con)
         elif ch==3:
+            updateDependent(cur, con)
+        elif ch==4:
             return
         else:
             print("Invalid choice")
