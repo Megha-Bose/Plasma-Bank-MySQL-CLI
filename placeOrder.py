@@ -35,21 +35,13 @@ def calcAge(bDate):
     else: 
         return today.year - bdate.year 
     """
-def placeOrder(cur,con):
+def placeOrder(cur,con,loginid):
     try:
         row = {}
         print("Enter details to place order: ")
-        row["Hospital_id"] = input("Hospital ID:")
-        row["name"] = (input("Hospital Name: "))
+        row["Hospital_id"] = loginid[8:len(loginid)]
         row["dist"] = float(input("Hospital Distance from plasma bank: "))
-        row["Login_id"] = "HOSP"+row["Hospital_id"]
-        newUser(cur,con,row["Login_id"])
         
-        query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(
-            row["Hospital_id"], row["name"], row["dist"], row["Login_id"])
-        cur.execute(query)
-        con.commit()
-
         row["Patient_id"] = input("Patient ID: ")
         name = (input("Name (Fname Lname): ")).split(' ')
         row["Fname"] = name[0]
@@ -62,10 +54,10 @@ def placeOrder(cur,con):
                 x=0
             else:
                 print("Invalid blood_type")
-        #row["Blood_type"] = input("Blood Type (A+/-,B+/-,O+/-,AB+/-): ")
+        
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         bdate = row["Bdate"].split('-')
-        row["Age"] = calcAge(int(date(bdate[0]),int(bdate[1]),int(bdate[2])))
+        row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
         allergies = (input("Patient allergies (comma separated): ")).split(',')
 
         row["Order_id"] = input("Order ID:")
@@ -85,7 +77,7 @@ def placeOrder(cur,con):
         con.commit()
         
         for allergy in allergies:
-            query = "INSERT INTO PATIENT_ALLERGIES(Hospital_id, Patient_id, Skills) VALUES('%s','%s','%s')"%(row["Hospital_id"], row["Staff_id"],skill)
+            query = "INSERT INTO PATIENT_ALLERGIES(Patient_id, Allergies) VALUES('%s','%s')"%(row["Patient_id"],allergy)
             cur.execute(query)
             con.commit()
 
@@ -119,8 +111,8 @@ def placeOrder(cur,con):
         print("We got a plasma sample for you")
         
         # get a vehicle
-        query1 = "SELECT Vehicle_id FROM LOGISTICS NATURAL JOIN VEHICLE_DETAILS WHERE Max_dist>=%f AND Availability==1" %(row["dist"])
-
+        query1 = "SELECT Vehicle_id FROM LOGISTICS NATURAL JOIN VEHICLE_DETAILS WHERE Max_dist>=%f AND Availability=1" %(row["dist"])
+        vehicle_id=''
         if cur.execute(query1)==0:
             con.commit()
             vehicle_id == 'NULL'
@@ -158,9 +150,10 @@ def placeOrder(cur,con):
             con.commit()
 
             #UPDATE USED STATUS OF PLASMA
+            donor_id=''
             query3 = "SELECT Donor_id FROM PLASMA WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id IN (SELECT Donor_id FROM DONOR WHERE Blood_type LIKE '%s')" %(inventory_id, row["Blood_type"])
             if cur.execute(query3):
-                donor_id = cur.fetchall();
+                donor_id = cur.fetchall()
             con.commit()
 
             query2 = "UPDATE PLASMA SET Used = 1 WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id LIKE '%s'" %(inventory_id, donor_id)
