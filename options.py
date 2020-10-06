@@ -168,7 +168,8 @@ def donorOpt(cur,con,loginid):
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
-            retrievePlasmaById(cur,con,loginid)
+            donorid = loginid[5:len(loginid)]
+            retrievePlasmaById(cur,con,donorid)
         else:
             print("Invalid choice")
 
