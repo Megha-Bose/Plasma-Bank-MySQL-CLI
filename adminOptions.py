@@ -174,7 +174,7 @@ def showAllDetails(cur, con):
         print("8. Exit")
         ch = int(input("Enter choice> "))
         if ch==1:
-            showAllPLasma(cur, con)
+            showAllPlasma(cur, con)
         elif ch==2:
             showAllStaff(cur, con)
         elif ch==3:
