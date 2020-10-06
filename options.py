@@ -78,12 +78,11 @@ def invStaffOpt(cur,con,loginid):
         print("5. Get Donor")
         print("6. Add plasma sample")
         print("7. Get Plasma samples")
-        print("8. Update department")
-        print("9. Add hospital")
-        print("10. Add inventory")
-        print("11. Logout")
+        print("8. Add hospital")
+        print("9. Add inventory")
+        print("10. Logout")
         ch = int(input("Enter choice> "))
-        if ch==11:
+        if ch==10:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
@@ -100,10 +99,8 @@ def invStaffOpt(cur,con,loginid):
         elif ch==7:
             getPlasma(cur, con)
         elif ch==8:
-            updateDept(cur, con)
-        elif ch==9:
             addHosp(cur, con)
-        elif ch==10:
+        elif ch==9:
             addInventory(cur, con)
         else:
             print("Invalid choice")
@@ -116,10 +113,9 @@ def logStafOpt(cur,con,loginid):
         print("2. Add vehicle")
         print("3. Update vehicle availability")
         print("4. Delete vehicle")
-        print("5. Update department")
-        print("6. Logout")
+        print("5. Logout")
         ch = int(input("Enter choice> "))
-        if ch==6:
+        if ch==5:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
@@ -129,8 +125,6 @@ def logStafOpt(cur,con,loginid):
             updateVehAv(cur, con)
         elif ch==4:
             delVehi(cur, con)
-        elif ch==5:
-            updateDept(cur, con)
         else:
             print("Invalid choice")
 
