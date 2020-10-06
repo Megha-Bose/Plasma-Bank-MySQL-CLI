@@ -226,7 +226,7 @@ def updateDonor(cur,con):
 	
 		cha = int(input("Number_of_donations (1/0) : "))
 		if cha == 1:
-			row["Newnd"] = input("Enter new Number_of_donations : ")
+			row["Newnd"] = int(input("Enter new Number_of_donations : "))
 			query = "UPDATE DONOR SET Number_of_donations = '%d' WHERE Donor_id LIKE '%s'" % (row["Newnd"], row["did"])
 			cur.execute(query)
 			con.commit()
