@@ -114,7 +114,7 @@ def placeOrder(cur,con):
             print("No plasma sample found for the given blood type")
             return
 
-        inventory_id = cur.fetchall()[0][0]
+        inventory_id = cur.fetchall()[0]['Inventory_id']
         con.commit()
         print("We got a plasma sample for you")
         
@@ -127,7 +127,7 @@ def placeOrder(cur,con):
             print("No vehicle found, you will have to pick up if you confirm order")
             
         else:
-            vehicle_id = cur.fetchall()[0][0]
+            vehicle_id = cur.fetchall()[0]['Vehicle_id']
             con.commit()
             print("Vehicle found pls confirm")
         
