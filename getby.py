@@ -1,3 +1,9 @@
+import retrieve_id
+from retrieve_id import *
+import retrieve_other
+from retrieve_other import *
+
+
 def getStaff(cur,con):
     while(1):
         print("Get by:\n")
