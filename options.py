@@ -39,9 +39,10 @@ def adminOpt(cur,con,loginid):
         print("7. Get information")
         print("8. Add hospital")
         print("9. Show all details")
-        print("10. Logout")
+        print("10. Add inventory")
+        print("11. Logout")
         ch = int(input("Enter choice> "))
-        if ch==10:
+        if ch==11:
             return
         elif ch==1:
             manageStaff(cur, con)
@@ -61,6 +62,8 @@ def adminOpt(cur,con,loginid):
             addHosp(cur, con)
         elif ch==9:
             showAllDetails(cur, con)
+        elif ch==10:
+            addInventory(cur, con)
         else:
             print("Invalid choice")
         
@@ -77,9 +80,10 @@ def invStaffOpt(cur,con,loginid):
         print("7. Get Plasma samples")
         print("8. Update department")
         print("9. Add hospital")
-        print("10. Logout")
+        print("10. Add inventory")
+        print("11. Logout")
         ch = int(input("Enter choice> "))
-        if ch==10:
+        if ch==11:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
@@ -99,6 +103,8 @@ def invStaffOpt(cur,con,loginid):
             updateDept(cur, con)
         elif ch==9:
             addHosp(cur, con)
+        elif ch==10:
+            addInventory(cur, con)
         else:
             print("Invalid choice")
     
@@ -132,10 +138,20 @@ def logStafOpt(cur,con,loginid):
 def staffOpt(cur,con,loginid):
     stid = loginid[5:len(loginid)]
     query = "SELECT Department_id FROM WORKS_FOR WHERE Staff_id LIKE '%s'" %(stid)
-    if cur.execute(query):
-        deprt = cur.fetchall()
-    con.commit()
-    if deprt == "DPI":
+    #print(query)
+    #print()
+    cur.execute(query)
+    # print(cur.fetchall())
+    # deprt=cur.fetchall()[0]
+    # con.commit()
+    dept = ""
+    result = cur.fetchall()
+    for row in result:
+        for key, value in row.items():
+            if key=="Department_id":
+                dept = value
+    print(dept)
+    if dept == "DPI":
         invStaffOpt(cur,con,loginid)
     else:
         logStafOpt(cur,con,loginid)
