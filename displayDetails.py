@@ -42,7 +42,7 @@ def displayDonorDetails(cur,con,loginid):
 
 def displayStaffDetails(cur,con,loginid):
     try:
-        query = "SELECT * FROM STAFF WHERE Login_id='%s'" % (loginid)
+        query = "SELECT * FROM STAFF NATURAL JOIN WORKS_FOR WHERE Login_id='%s'" % (loginid)
         if cur.execute(query):
             print(cur.fetchall())
             con.commit()

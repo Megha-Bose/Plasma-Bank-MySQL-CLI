@@ -22,14 +22,9 @@ def delStaff(cur,con):
         row["Staff_id"] = input("Enter Staff ID to delete: ")
         row["Login_id"] = "STAFF" + row["Staff_id"]
 
-        query = "SELECT * FROM WORKS_FOR WHERE Staff_id='%s'" % (row["Staff_id"])
+        query = "SELECT Department_id FROM WORKS_FOR WHERE Staff_id='%s'" % (row["Staff_id"])
         cur.execute(query)
-        result = cur.fetchall()
-        for roww in result:
-            for key, value in roww.items():
-                if key=="Department_id":
-                    row["dep"] = value
-        
+        row["dep"] = cur.fetchall()
         con.commit()
 
         query = "UPDATE DEPARTMENT SET No_of_employees=No_of_employees - 1 WHERE Department_id='%s'" % (row["dep"])
