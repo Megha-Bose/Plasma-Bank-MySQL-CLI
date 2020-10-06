@@ -188,16 +188,31 @@ def addVehi(cur,con):
                 print("Invalid vehicle type")
 
         x = 1
+        """        
         while(x):
             row["Availability"] = int(input("Vehicle Availability (1, 0): "))
             if row["Availability"] in [1, 0]:
                 x=0
             else:
                 print("Please enter 0 or 1")
+        """
+        row["Availability"] = 1
+        row["Deliveries"] = 0
+        row["Department_id"] = "DL"
 
-        row["Deliveries"] = int(input("Number of deliveries: "))
-        row["Department_id"] = input("Department_id: ")
+        """query = "SELECT *FROM VEHICLE_DETAILS WHERE Vehicle_type LIKE '%s'" %(row["Vehicle_type"])
+        if(cur.execute(query)==0)
+            print("")
 
+
+        row["Max_dist"] = int(input("What is the maximum distance(in km) this vehicle can travel? "))
+        row["Speed"] = int(input("Average speed(in km/hr) with which it can travel: "))
+        
+        query1 = "INSERT INTO VEHICLE_DETAILS(Vehicle_type,Max_dist,Speed) VALUES('%s',%d,%d)"%(
+            row["Vehicle_type"],row["Max_dist"],row["Speed"])
+        cur.execute(query1)
+        con.commit()
+"""
         query = "INSERT INTO LOGISTICS(Vehicle_id, Vehicle_type, Availability, Deliveries, Department_id) VALUES('%s', '%s', %d, %d, '%s')" % (
             row["Vehicle_id"], row["Vehicle_type"], row["Availability"], row["Deliveries"], row["Department_id"])
 
@@ -313,8 +328,8 @@ def addHosp(cur,con):
         print("Enter new hospital details: ")
         row["Hospital_id"] = input("Hospital ID: ")
         row["name"] = (input("Hospital Name: "))
-        row["dist"] = float(input("Hospital Distance from plasma bank: "))
-        row["Login_id"] = "HOSP"+row["Hospital_id"]
+        row["dist"] = float(input("Hospital Distance(in km) from plasma bank: "))
+        row["Login_id"] = "HOSPITAL"+row["Hospital_id"]
         newUser(cur,con,row["Login_id"])
         
         query = "INSERT INTO HOSPITAL(Hospital_id,Hospital_name,Distance,Login_id) VALUES('%s','%s',%f,'%s')"%(

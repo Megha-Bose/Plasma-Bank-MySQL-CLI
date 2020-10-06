@@ -65,14 +65,14 @@ def placeOrder(cur,con,loginid):
         query = "INSERT INTO ORDER_REQUEST(Order_id, Vehicle_id, Order_date, Hospital_id, Blood_type, Accepted, Distance, Donor_id) VALUES('%s', NULL, '%s', '%s', '%s', 0, %f, NULL)" % (
             row["Order_id"], row["Order_date"], row["Hospital_id"], row["Blood_type"], row["dist"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
         query = "INSERT INTO PATIENT(First_name, Last_name, Patient_id, Birth_date, Hospital_id, Blood_type, Age) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d)" % (
             row["Fname"], row["Lname"], row["Patient_id"], row["Bdate"], row["Hospital_id"], row["Blood_type"], row["Age"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
         
@@ -153,7 +153,7 @@ def placeOrder(cur,con,loginid):
             donor_id=''
             query3 = "SELECT Donor_id FROM PLASMA WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id IN (SELECT Donor_id FROM DONOR WHERE Blood_type LIKE '%s')" %(inventory_id, row["Blood_type"])
             if cur.execute(query3):
-                donor_id = cur.fetchall()
+                donor_id = cur.fetchone()['Donor_id']
             con.commit()
 
             query2 = "UPDATE PLASMA SET Used = 1 WHERE Inventory_id LIKE '%s' AND Used = 0 AND Donor_id LIKE '%s'" %(inventory_id, donor_id)
