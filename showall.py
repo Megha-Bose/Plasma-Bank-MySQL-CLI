@@ -5,7 +5,7 @@ def showAllPlasma(cur,con):
     try:
         query = "SELECT * FROM PLASMA"
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -20,12 +20,12 @@ def showAllStaff(cur,con):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                print(row)
+                pretty(row)
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
                         if cur.execute(query):
-                            print(cur.fetchall())
+                            pretty(cur.fetchall())
                         con.commit()
         con.commit()
     except Exception as e:
@@ -52,7 +52,7 @@ def showAllOrder(cur,con):
     try:
         query = "SELECT * FROM ORDER_REQUEST"
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -65,7 +65,7 @@ def showAllHospital(cur,con):
     try:
         query = "SELECT * FROM HOSPITAL"
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -78,7 +78,7 @@ def showAllInv(cur,con):
     try:
         query = "SELECT * FROM PLASMA_INVENTORY"
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -93,12 +93,12 @@ def showAllVehi(cur,con):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                print(row)
+                pretty(row)
                 for key, value in row.items():
                     if key=="Vehicle_type":
                         query = "SELECT * FROM VEHICLE_DETAILS WHERE Vehicle_type='%s'" % (value)
                         if cur.execute(query):
-                            print(cur.fetchall())
+                            pretty(cur.fetchall())
                         con.commit()
         con.commit()
     except Exception as e:

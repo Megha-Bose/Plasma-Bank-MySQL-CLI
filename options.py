@@ -152,11 +152,9 @@ def staffOpt(cur,con,loginid):
     stid = loginid[5:len(loginid)]
     query = "SELECT Department_id FROM WORKS_FOR WHERE Staff_id LIKE '%s'" %(stid)
     #print(query)
-    #print()
+    
     cur.execute(query)
-    # print(cur.fetchall())
-    # deprt=cur.fetchall()[0]
-    # con.commit()
+    
     dept = ""
     result = cur.fetchall()
     for row in result:
