@@ -5,7 +5,7 @@ def pretty(arr):
 	rows = [row.values() for row in arr]
 	#print(header)
 	#print(rows)
-	#print(tabulate.tabulate(rows, header))
+	print(tabulate.tabulate(rows, header))
 
 def pretty1(row):
 	header = row.keys()
