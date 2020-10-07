@@ -27,12 +27,12 @@ Password | admin | sk | dk | hk
 
 Here, k belongs to {1,2,3}.
 
-When adding a new Staff, Donor or Hospital only the Staff ID, Donor ID or Hospital ID is required as input. The login IDs will be created automatically as follows:
+When adding a new Staff, Donor or Hospital only the Staff ID, Donor ID or Hospital ID is required as input. The Login IDs will be created automatically as follows:
 - For Staff:
 		Login ID = "STAFF" + Staff ID
-		Ex: staff ID is "5", Login ID will be "STAFF5"
+		Ex: Staff ID is "5", Login ID will be "STAFF5"
 - For Donor:
-		LoginID = "DONOR" + Donor ID
+		Login ID = "DONOR" + Donor ID
 - For Hospital:
 		Login ID = "HOSPITAL" + Hospital ID
 
