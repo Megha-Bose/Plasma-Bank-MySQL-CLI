@@ -113,8 +113,11 @@ def addDonor(cur,con):
         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
         row["noDon"] = int(input("Number of donations: "))
 
-        query = "INSERT INTO DONOR(Name, Donor_id, Birth_date, Number_of_donations, Blood_type, Aadhar_num, Login_id, Age) VALUES('%s', '%s', '%s', %d, '%s', %d, '%s', 28)" % (
-            row["name"], row["Donor_id"], row["Bdate"], row["noDon"], row["Blood_type"], row["aadhar"], row["Login_id"])
+        bdate = row["Bdate"].split('-')
+        row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
+
+        query = "INSERT INTO DONOR(Name, Donor_id, Birth_date, Number_of_donations, Blood_type, Aadhar_num, Login_id, Age) VALUES('%s', '%s', '%s', %d, '%s', %d, '%s', %d)" % (
+            row["name"], row["Donor_id"], row["Bdate"], row["noDon"], row["Blood_type"], row["aadhar"], row["Login_id"],row["Age"])
 
         print(query)
         cur.execute(query)

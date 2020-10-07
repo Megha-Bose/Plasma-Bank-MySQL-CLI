@@ -76,35 +76,48 @@ def invStaffOpt(cur,con,loginid):
     while(1):
         print("1. View your details")
         print("2. Add donor")
-        print("3. Update donor")
-        print("4. Delete donor")
-        print("5. Get Donor")
-        print("6. Add plasma sample")
-        print("7. Get Plasma samples")
-        print("8. Add hospital")
-        print("9. Add inventory")
-        print("10. Logout")
+        print("3. Show all donors")
+        print("4. Update donor")
+        print("5. Delete donor")
+        print("6. Get Donor")
+        print("7. Add plasma sample")
+        print("8. Show all plasma samples")
+        print("9. View filtered Plasma samples")
+        print("10. Add hospital")
+        print("11. Show all hospitals")
+        print("12. Add inventory")
+        print("13. Show all inventories")
+        print("14. Logout")
         ch = int(input("Enter choice> "))
-        if ch==10:
+        if ch==14:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
             addDonor(cur, con)
-        elif ch==3:
-            updateDonor(cur, con)
         elif ch==4:
-            delDonor(cur, con)
+            updateDonor(cur, con)
         elif ch==5:
-            getDonor(cur, con)
+            delDonor(cur, con)
         elif ch==6:
-            addPlasma(cur, con)
+            getDonor(cur, con)
         elif ch==7:
-            getPlasma(cur, con)
-        elif ch==8:
-            addHosp(cur, con)
+            addPlasma(cur, con)
         elif ch==9:
+            getPlasma(cur, con)
+        elif ch==10:
+            addHosp(cur, con)
+        elif ch==12:
             addInventory(cur, con)
+        elif ch==3:
+            showAllDonor(cur,con)
+        elif ch==8:
+            showAllPlasma(cur,con)
+        elif ch==11:
+            showAllHospital(cur,con)
+        elif ch==13:
+            showAllInv(cur,con)
+
         else:
             print("Invalid choice")
     
@@ -114,20 +127,23 @@ def logStafOpt(cur,con,loginid):
     while(1):
         print("1. View your details")
         print("2. Add vehicle")
-        print("3. Update vehicle availability")
-        print("4. Delete vehicle")
-        print("5. Logout")
+        print("3. Show all vehicles")
+        print("4. Update vehicle availability")
+        print("5. Delete vehicle")
+        print("6. Logout")
         ch = int(input("Enter choice> "))
-        if ch==5:
+        if ch==6:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
         elif ch==2:
             addVehi(cur, con)
-        elif ch==3:
-            updateVehAv(cur, con)
         elif ch==4:
+            updateVehAv(cur, con)
+        elif ch==5:
             delVehi(cur, con)
+        elif ch==3:
+            showAllVehi(cur,con)
         else:
             print("Invalid choice")
 

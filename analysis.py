@@ -12,7 +12,7 @@ def getDonorOrder(cur, con):
 
 	except Exception as e:
 		con.rollback()
-		print("Failed to find donors with max donations")
+		print("Failed to find donors whose blood samples have been used for the entered order ID")
 		print(">>>>>>>>>>>>>", e)
 
 	return
@@ -27,7 +27,7 @@ def getOrderVehicle(cur, con):
 
 	except Exception as e:
 		con.rollback()
-		print("Failed to find donors with max donations")
+		print("Failed to get orders that have been fulfilled by entered vehicle type")
 		print(">>>>>>>>>>>>>", e)
 
 	return
@@ -36,14 +36,14 @@ def getDonAge(cur,con):
 	try:
 		mini = input("Enter minimum age: ")
 		maxi = input("Enter maximum age: ")
-		query = "SELECT DONOR.* FROM DONOR NATURAL JOIN PLASMA WHERE Age>=%d AND Age<=%d AND Used=1" % (mini, maxi)
+		query = "SELECT DISTINCT DONOR.* FROM DONOR NATURAL JOIN PLASMA WHERE Age>=%d AND Age<=%d AND Used=1" % (mini, maxi)
 		if cur.execute(query):
 			print(cur.fetchall())
 		con.commit()
 
 	except Exception as e:
 		con.rollback()
-		print("Failed to find donors with max donations")
+		print("Failed to get donors in the given range whose plasma sample has been used")
 		print(">>>>>>>>>>>>>", e)
 
 	return
