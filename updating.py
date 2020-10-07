@@ -117,7 +117,7 @@ def updateVehAv(cur,con):
 			else:
 				print("Please enter 0 or 1")		
 		
-		query = "UPDATE LOGISTICS SET Availability = '%b' WHERE Vehicle_id LIKE '%s'" % (cha, row["vid"])
+		query = "UPDATE LOGISTICS SET Availability = '%d' WHERE Vehicle_id LIKE '%s'" % (cha, row["vid"])
 		cur.execute(query)
 		con.commit()	        
 		print("Updated Database")
