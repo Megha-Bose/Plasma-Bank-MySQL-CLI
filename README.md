@@ -27,6 +27,7 @@ Login_id | ADMIN | STAFFk | DONORk | HOSPITALk
 Password | admin | sk | dk | hk 
 
 Here, k belongs to {1,2,3}.
+There is only one Admin account for the system.
 
 When adding a new Staff, Donor or Hospital only the Staff ID, Donor ID or Hospital ID is required as input. The Login IDs will be created automatically as follows:
 - For Staff:
