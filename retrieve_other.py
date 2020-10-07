@@ -8,12 +8,15 @@ def retrieveStaffByName(cur,con,fname,lname):
             result = cur.fetchall()
             for row in result:
                 pretty1(row)
+
+                print("Skills:")
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
                         if cur.execute(query):
-                            pretty(cur.fetchall())
+                            prettySkills(cur.fetchall())
                         con.commit()
+                print("")
         con.commit()
     except Exception as e:
         con.rollback()
@@ -107,12 +110,14 @@ def retrieveStaffByDeptId(cur,con,deptid):
             result = cur.fetchall()
             for row in result:
                 pretty1(row)
+                print("Skills:")
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
                         if cur.execute(query):
-                            pretty(cur.fetchall())
+                            prettySkills(cur.fetchall())
                         con.commit()
+                    print("")
         con.commit()
     except Exception as e:
         con.rollback()
@@ -141,12 +146,14 @@ def retrievePatByHospId(cur,con,hospid):
             result = cur.fetchall()
             for row in result:
                 pretty1(row)
+                print("Allergies:")
                 for key, value in row.items():
                     if key=="Patient_id":
                         query = "SELECT * FROM PATIENT_ALLERGIES WHERE Patient_id='%s'" % (value)
                         if cur.execute(query):
-                            pretty(cur.fetchall())
+                            prettyAllergies(cur.fetchall())
                         con.commit()
+                print("")
         con.commit()
         if cur.execute(query):
             pretty(cur.fetchall())

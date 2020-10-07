@@ -7,10 +7,12 @@ def retrieveStaffById(cur,con,staffid):
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
+            print("Skills:")
         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (staffid)
         if cur.execute(query):
-            pretty(cur.fetchall())
+            prettySkills(cur.fetchall())
             con.commit()
+        print("")
     except Exception as e:
         con.rollback()
         print("Retrieve by ID failed")

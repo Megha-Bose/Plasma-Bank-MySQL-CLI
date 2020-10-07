@@ -1,3 +1,6 @@
+import pretty
+from pretty import *
+
 def showAllPlasma(cur,con):
     try:
         query = "SELECT * FROM PLASMA"
@@ -18,12 +21,14 @@ def showAllStaff(cur,con):
             result = cur.fetchall()
             for row in result:
                 pretty1(row)
+                print("Skills:")
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
                         if cur.execute(query):
-                            pretty(cur.fetchall())
+                            prettySkills(cur.fetchall())
                         con.commit()
+                print("")
         con.commit()
     except Exception as e:
         con.rollback()

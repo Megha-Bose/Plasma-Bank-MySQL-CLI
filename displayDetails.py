@@ -50,10 +50,12 @@ def displayStaffDetails(cur,con,loginid):
             pretty(cur.fetchall())
             con.commit()
         staffid = loginid[5:len(loginid)]
+        print("Skills:")
         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (staffid)
         if cur.execute(query):
-            pretty(cur.fetchall())
+            prettySkills(cur.fetchall())
             con.commit()
+        print("")
     except Exception as e:
         con.rollback()
         print("Display Details failed")
