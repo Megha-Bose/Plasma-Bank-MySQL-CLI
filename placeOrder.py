@@ -43,7 +43,7 @@ def placeOrder(cur,con,loginid):
         #row["dist"] = float(input("Hospital Distance from plasma bank: "))
         query6 = "SELECT Distance FROM HOSPITAL WHERE Hospital_id LIKE '%s'" %(row["Hospital_id"])
         cur.execute(query6)
-        row["dist"] = cur.fetchone()["Distance"]
+        row["dist"] = cur.fetchone()['Distance']
         row["Patient_id"] = input("Patient ID: ")
         name = (input("Name (Fname Lname): ")).split(' ')
         row["Fname"] = name[0]

@@ -87,6 +87,11 @@ while(1):
     username = input("MYSQL Username: ")
     password = input("MYSQL Password: ")
     dbname = input("Database Name: ")
+    port = (input("Port (if you are using docker):"))
+    if port=="":
+        port=''
+    else:
+        port=int(port)
 
     try:
         # Set db name accordingly which have been create by you
@@ -95,6 +100,7 @@ while(1):
                               user=username,
                               password=password,
                               db=dbname,
+                              port=port,
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
 
