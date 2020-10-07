@@ -6,6 +6,7 @@
 
 ## Run the script
 
+Run `pip3 install tabular` if tabular is not installed.
 Execute the script in the directory that contains the source files:
     ```
     $ python3 PlasmaBank.py
