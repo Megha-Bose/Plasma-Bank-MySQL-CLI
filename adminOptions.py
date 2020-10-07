@@ -104,7 +104,7 @@ def manageVeh(cur, con):
 
 def getInfo(cur, con, loginid):
     while(1):
-        print("1. View your details")  # view details
+        print("1. View your details") 
         print("2. Get staff")  
         print("3. Get donor")
         print("4. Get plasma samples")
@@ -114,7 +114,7 @@ def getInfo(cur, con, loginid):
         print("8. Get department")  
         print("9. Get dependent")
         print("10. Get patient")
-        print("11. Average salary of staff")  # Hire an Employee
+        print("11. Average salary of staff")
         print("12. Donors with more than x donations")
         print("13. Donor with maximum number of donations")
         print("14. Average number of donations per month in a particular year")

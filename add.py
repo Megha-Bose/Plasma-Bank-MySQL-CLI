@@ -119,7 +119,7 @@ def addDonor(cur,con):
         query = "INSERT INTO DONOR(Name, Donor_id, Birth_date, Number_of_donations, Blood_type, Aadhar_num, Login_id, Age) VALUES('%s', '%s', '%s', %d, '%s', %d, '%s', %d)" % (
             row["name"], row["Donor_id"], row["Bdate"], row["noDon"], row["Blood_type"], row["aadhar"], row["Login_id"],row["Age"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -164,7 +164,7 @@ def addDep(cur,con):
         query = "INSERT INTO DEPENDENT(First_name, Last_name, Staff_id, Gender, Relationship, Age) VALUES('%s', '%s', '%s', '%c', '%s', '%d')" % (
             row["Fname"], row["Lname"], row["Staff_id"], row["gend"], row["rel"], row["age"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
         print("Inserted Into Database")
@@ -219,7 +219,7 @@ def addVehi(cur,con):
         query = "INSERT INTO LOGISTICS(Vehicle_id, Vehicle_type, Availability, Deliveries, Department_id) VALUES('%s', '%s', %d, %d, '%s')" % (
             row["Vehicle_id"], row["Vehicle_type"], row["Availability"], row["Deliveries"], row["Department_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -254,15 +254,15 @@ def addPlasma(cur, con):
             print("Add an inventory with vacancy first")
             return
 
-        inventory_id = cur.fetchone()#[0]#.Inventory_id
-        print(inventory_id)
+        inventory_id = cur.fetchone()
+        #print(inventory_id)
         inventory_id = inventory_id['Inventory_id']
-        print(inventory_id)
+        #print(inventory_id)
         con.commit()
         query = "INSERT INTO PLASMA(Donor_id, Donation_date, Sample_no, Used, Inventory_id) VALUES('%s', '%s', %d, 0, '%s')" % (
             row["Donor_id"], row["Donation_date"], row["Sample_no"], inventory_id)
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 
@@ -311,7 +311,7 @@ def addInventory(cur, con):
         query = "INSERT INTO PLASMA_INVENTORY(No_of_Aplus, No_of_Aminus, No_of_Bplus, No_of_Bminus, No_of_ABplus, No_of_ABminus, No_of_Oplus, No_of_Ominus,Capacity,Vacancy,Department_id, Inventory_id) VALUES(0, 0, 0, 0, 0,0,0,0,%d,%d,'DPI','%s')" % (
             row["Capacity"], row["Capacity"], row["Inventory_id"])
 
-        print(query)
+        #print(query)
         cur.execute(query)
         con.commit()
 

@@ -1,8 +1,11 @@
+import pretty
+from pretty import *
+
 def displayUserDetails(cur,con,loginid):
     try:
         query = "SELECT * FROM USER WHERE Login_id='%s'" % (loginid)
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -16,7 +19,7 @@ def displayHospitalDetails(cur,con,loginid):
     try:
         query = "SELECT * FROM HOSPITAL WHERE Login_id='%s'" % (loginid)
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -30,7 +33,7 @@ def displayDonorDetails(cur,con,loginid):
     try:
         query = "SELECT * FROM DONOR WHERE Login_id='%s'" % (loginid)
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
@@ -44,12 +47,12 @@ def displayStaffDetails(cur,con,loginid):
     try:
         query = "SELECT * FROM STAFF NATURAL JOIN WORKS_FOR WHERE Login_id='%s'" % (loginid)
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
         staffid = loginid[5:len(loginid)]
         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (staffid)
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
