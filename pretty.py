@@ -11,3 +11,7 @@ def pretty1(row):
 	header = row.keys()
 	rows = [row.values()]
 	print(tabulate.tabulate(rows,header))
+
+def prettySkills(arr, comp):
+	print(arr)
+	print(comp)
