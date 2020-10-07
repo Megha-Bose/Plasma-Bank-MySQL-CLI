@@ -156,7 +156,7 @@ def retrievePatByHospId(cur,con,hospid):
                 print("")
         con.commit()
         if cur.execute(query):
-            pretty(cur.fetchall())
+            #pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
