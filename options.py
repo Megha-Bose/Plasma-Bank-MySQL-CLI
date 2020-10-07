@@ -40,9 +40,10 @@ def adminOpt(cur,con,loginid):
         print("8. Add hospital")
         print("9. Show all details")
         print("10. Add inventory")
-        print("11. Logout")
+        print("11. Update user")
+        print("12. Logout")
         ch = int(input("Enter choice> "))
-        if ch==11:
+        if ch==12:
             return
         elif ch==1:
             manageStaff(cur, con)
@@ -64,6 +65,8 @@ def adminOpt(cur,con,loginid):
             showAllDetails(cur, con)
         elif ch==10:
             addInventory(cur, con)
+        elif ch==11:
+            updateUser(cur, con)
         else:
             print("Invalid choice")
         

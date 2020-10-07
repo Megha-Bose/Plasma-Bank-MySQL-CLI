@@ -226,7 +226,7 @@ def updateDonor(cur,con):
 	
 		cha = int(input("Number_of_donations (1/0) : "))
 		if cha == 1:
-			row["Newnd"] = input("Enter new Number_of_donations : ")
+			row["Newnd"] = int(input("Enter new Number_of_donations : "))
 			query = "UPDATE DONOR SET Number_of_donations = '%d' WHERE Donor_id LIKE '%s'" % (row["Newnd"], row["did"])
 			cur.execute(query)
 			con.commit()
@@ -248,6 +248,102 @@ def updateDonor(cur,con):
 		print(">>>>>>>>>>>>>", e)
 
 	return
+
+def updateDependent(cur,con):
+
+	try:
+		value=0
+		row = {}
+
+		while(value==0):
+			row["fname"] = input("Enter First_name of the dependent whose details you wish to change: ")
+			row["lname"] = input("Enter Last_name of the dependent whose details you wish to change: ")
+			row["id"] = input("Enter staff id : ")
+			que = "SELECT * FROM DEPENDENT WHERE Staff_id LIKE '%s' AND First_name LIKE '%s' AND Last_name LIKE '%s'" % (row["id"], row["fname"], row["lname"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid Dependent details")
+			con.commit()
+
+		print("Do you want to edit the following fields? ")
+		cha = int(input("Age (1/0) : "))
+		if cha == 1:
+			row["Newage"] = int(input("Enter new age : "))
+			query = "UPDATE DEPENDENT SET Age = '%d' WHERE Staff_id LIKE '%s' AND First_name LIKE '%s' AND Last_name LIKE '%s'" % (row["Newage"], row["id"], row["fname"], row["lname"])
+			cur.execute(query)
+			con.commit()
+	
+		cha = int(input("Gender (1/0) : "))
+		if cha == 1:
+			x = 1
+			while(x):
+				row["gend"] = input("Enter new gender (F,M,T,O): ")
+				if row["gend"] in ["F","M","T","O"]:
+					x=0
+				else:
+					print("Invalid gender input")
+
+			query = "UPDATE DEPENDENT SET Gender = '%s' WHERE Staff_id LIKE '%s' AND First_name LIKE '%s' AND Last_name LIKE '%s'" % (row["gend"], row["id"], row["fname"], row["lname"])
+			cur.execute(query)
+			con.commit()
+		
+		cha = int(input("Relationship (1/0) : "))
+		if cha == 1:
+			row["Newrel"] = input("Enter new relationship : ")
+			
+			query = "UPDATE DEPENDENT SET Relationship = '%s' WHERE Staff_id LIKE '%s' AND First_name LIKE '%s' AND Last_name LIKE '%s'" % (row["Newrel"], row["id"], row["fname"], row["lname"])
+			cur.execute(query)
+			con.commit()
+	
+		print("Updated Database")
+
+	except Exception as e:
+		con.rollback()
+		print("Failed to update dependent")
+		print(">>>>>>>>>>>>>", e)
+
+	return
+
+def updateUser(cur,con):
+
+	try:
+		value=0
+		row = {}
+
+		while(value==0):
+			row["id"] = input("Enter Login_id of user whose details you wish to change: ")
+			que = "SELECT * FROM USER WHERE Login_id LIKE '%s'" % (row["id"])
+			value = cur.execute(que)
+			if value == 0:
+				print("Invalid Login_id")
+			con.commit()
+
+		print("Do you want to edit the following fields? ")
+		cha = int(input("Contact (1/0) : "))
+		if cha == 1:
+			row["Newcon"] = input("Enter new Contact : ")
+			query = "UPDATE USER SET Contact = '%s' WHERE Login_id LIKE '%s'" % (row["Newcon"], row["id"])
+			cur.execute(query)
+			con.commit()
+	
+		print("Do you want to edit the following fields? ")
+		cha = int(input("Address (1/0) : "))
+		if cha == 1:
+			row["Newadd"] = input("Enter new Address : ")
+			query = "UPDATE USER SET Address = '%s' WHERE Login_id LIKE '%s'" % (row["Newadd"], row["id"])
+			cur.execute(query)
+			con.commit()
+	
+		print("Updated Database")
+
+	except Exception as e:
+		con.rollback()
+		print("Failed to update user")
+		print(">>>>>>>>>>>>>", e)
+
+	return
+
+
 
 
 
