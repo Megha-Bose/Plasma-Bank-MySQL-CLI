@@ -7,7 +7,7 @@ def retrieveStaffByName(cur,con,fname,lname):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                pretty(row)
+                pretty1(row)
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
@@ -106,7 +106,7 @@ def retrieveStaffByDeptId(cur,con,deptid):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                pretty(row)
+                pretty1(row)
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
@@ -140,7 +140,7 @@ def retrievePatByHospId(cur,con,hospid):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                pretty(row)
+                pretty1(row)
                 for key, value in row.items():
                     if key=="Patient_id":
                         query = "SELECT * FROM PATIENT_ALLERGIES WHERE Patient_id='%s'" % (value)

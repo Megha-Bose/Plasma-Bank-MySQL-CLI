@@ -20,7 +20,7 @@ def showAllStaff(cur,con):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                pretty(row)
+                pretty1(row)
                 for key, value in row.items():
                     if key=="Staff_id":
                         query = "SELECT * FROM STAFF_SKILLS WHERE Staff_id='%s'" % (value)
@@ -93,7 +93,7 @@ def showAllVehi(cur,con):
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
-                pretty(row)
+                pretty1(row)
                 for key, value in row.items():
                     if key=="Vehicle_type":
                         query = "SELECT * FROM VEHICLE_DETAILS WHERE Vehicle_type='%s'" % (value)
