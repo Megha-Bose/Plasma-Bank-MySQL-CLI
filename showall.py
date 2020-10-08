@@ -41,7 +41,7 @@ def showAllDonor(cur,con):
     try:
         query = "SELECT * FROM DONOR"
         if cur.execute(query):
-            print(cur.fetchall())
+            pretty(cur.fetchall())
             con.commit()
     except Exception as e:
         con.rollback()
