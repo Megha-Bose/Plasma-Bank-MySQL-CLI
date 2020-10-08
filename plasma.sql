@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: plasma
+-- Host: 127.0.0.1    Database: plasma_bank
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -100,7 +100,7 @@ CREATE TABLE `DONOR` (
 
 LOCK TABLES `DONOR` WRITE;
 /*!40000 ALTER TABLE `DONOR` DISABLE KEYS */;
-INSERT INTO `DONOR` VALUES ('1','Dname1',1,'A+',0,30,'1990-01-01','DONOR1'),('2','Dname2',2,'B+',0,40,'1980-01-01','DONOR2'),('3','Dname3',3,'O-',0,42,'1978-03-01','DONOR3');
+INSERT INTO `DONOR` VALUES ('1','Dname1',1,'A+',1,30,'1990-01-01','DONOR1'),('2','Dname2',2,'B+',1,40,'1980-01-01','DONOR2'),('3','Dname3',3,'O-',1,42,'1978-03-01','DONOR3');
 /*!40000 ALTER TABLE `DONOR` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-06 20:44:08
+-- Dump completed on 2020-10-08 11:34:33
