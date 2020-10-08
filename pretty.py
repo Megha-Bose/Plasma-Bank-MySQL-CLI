@@ -19,5 +19,6 @@ def prettySkills(arr):
 
 def prettyAllergies(arr):
 	for row in arr:
-		print(" - "+row['Allergies'])
+		if row['Allergies']!="":
+			print(" - "+row['Allergies'])
 

@@ -46,6 +46,7 @@ def manageStaff(cur, con):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 def manageDep(cur, con):
     while(1):
@@ -64,6 +65,7 @@ def manageDep(cur, con):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
        
 def manageDonor(cur, con):
@@ -83,6 +85,7 @@ def manageDonor(cur, con):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 def manageVeh(cur, con):
     while(1):
@@ -101,6 +104,7 @@ def manageVeh(cur, con):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 def getInfo(cur, con, loginid):
     while(1):
@@ -164,6 +168,7 @@ def getInfo(cur, con, loginid):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 def showAllDetails(cur, con):
     while(1):
@@ -194,3 +199,4 @@ def showAllDetails(cur, con):
             return
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
