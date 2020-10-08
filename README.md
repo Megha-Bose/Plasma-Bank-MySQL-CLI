@@ -37,4 +37,6 @@ When adding a new Staff, Donor or Hospital only the Staff ID, Donor ID or Hospit
 		Login ID = "DONOR" + Donor ID
 - For Hospital:
 		Login ID = "HOSPITAL" + Hospital ID
+		
+NOTE: To add a plasma sample, the staff must add a donor first and use that donor id to add the plasma sample. 
 
