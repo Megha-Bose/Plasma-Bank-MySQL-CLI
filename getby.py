@@ -44,10 +44,8 @@ def getDonor(cur,con):
             bloodtype = input("Enter Blood Type: ")
             retrieveDonorByBloodType(cur,con,bloodtype)
         elif ch==3:
-            name = (input("Enter Name (Fname Lname): ")).split(' ')
-            fname = name[0]
-            lname = name[1]
-            retrieveDonorByName(cur,con,fname,lname)
+            name = input("Enter Name (Fname Lname): ")
+            retrieveDonorByName(cur,con,name)
 
 
 def getPlasma(cur,con):

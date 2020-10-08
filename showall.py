@@ -16,7 +16,7 @@ def showAllPlasma(cur,con):
 
 def showAllStaff(cur,con):
     try:
-        query = "SELECT * FROM STAFF"
+        query = "SELECT STAFF.*,Contact,Address FROM STAFF NATURAL JOIN USER"
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
@@ -39,7 +39,7 @@ def showAllStaff(cur,con):
 
 def showAllDonor(cur,con):
     try:
-        query = "SELECT * FROM DONOR"
+        query = "SELECT DONOR.*,Contact,Address FROM DONOR NATURAL JOIN USER"
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
@@ -65,7 +65,7 @@ def showAllOrder(cur,con):
 
 def showAllHospital(cur,con):
     try:
-        query = "SELECT * FROM HOSPITAL"
+        query = "SELECT HOSPITAL.*,Contact,Address FROM HOSPITAL NATURAL JOIN USER"
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()

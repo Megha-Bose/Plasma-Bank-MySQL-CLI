@@ -3,7 +3,7 @@ from pretty import *
 
 def retrieveStaffByName(cur,con,fname,lname):
     try:
-        query = "SELECT * FROM STAFF WHERE First_name='%s' AND Last_name='%s'" % (fname, lname)
+        query = "SELECT STAFF.*,Contact,Address FROM STAFF NATURAL JOIN USER WHERE First_name='%s' AND Last_name='%s'" % (fname, lname)
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
@@ -25,9 +25,9 @@ def retrieveStaffByName(cur,con,fname,lname):
     return
 
 
-def retrieveDonorByName(cur,con,fname,lname):
+def retrieveDonorByName(cur,con,name):
     try:
-        query = "SELECT * FROM DONOR WHERE First_name='%s' AND Last_name='%s'" % (fname, lname)
+        query = "SELECT DONOR.*,Contact,Address FROM DONOR NATURAL JOIN USER WHERE Name='%s'" % (name)
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
@@ -40,7 +40,7 @@ def retrieveDonorByName(cur,con,fname,lname):
 
 def retrieveDonorByBloodType(cur,con,bloodtype):
     try:
-        query = "SELECT * FROM DONOR WHERE Blood_type='%s'" % (bloodtype)
+        query = "SELECT DONOR.*,Contact,Address FROM DONOR NATURAL JOIN USER WHERE Blood_type='%s'" % (bloodtype)
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
@@ -105,7 +105,7 @@ def retrieveOrderByAccepted(cur,con,accepted):
 
 def retrieveStaffByDeptId(cur,con,deptid):
     try:
-        query = "SELECT * FROM STAFF NATURAL JOIN WORKS_FOR WHERE Department_id='%s'" % (deptid)
+        query = "SELECT STAFF.*,Contact,Address FROM STAFF NATURAL JOIN USER NATURAL JOIN WORKS_FOR WHERE Department_id='%s'" % (deptid)
         if cur.execute(query):
             result = cur.fetchall()
             for row in result:
@@ -117,7 +117,7 @@ def retrieveStaffByDeptId(cur,con,deptid):
                         if cur.execute(query):
                             prettySkills(cur.fetchall())
                         con.commit()
-                    print("")
+                print("")
         con.commit()
     except Exception as e:
         con.rollback()

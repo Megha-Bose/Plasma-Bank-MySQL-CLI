@@ -3,7 +3,7 @@ from pretty import *
 
 def retrieveStaffById(cur,con,staffid):
     try:
-        query = "SELECT * FROM STAFF WHERE Staff_id='%s'" % (staffid)
+        query = "SELECT STAFF.*,Contact,Address FROM STAFF NATURAL JOIN USER WHERE Staff_id='%s'" % (staffid)
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
@@ -22,7 +22,7 @@ def retrieveStaffById(cur,con,staffid):
 
 def retrieveDonorById(cur,con,donorid):
     try:
-        query = "SELECT * FROM DONOR WHERE Donor_id='%s'" % (donorid)
+        query = "SELECT DONOR.*,Contact,Address FROM DONOR NATURAL JOIN USER WHERE Donor_id='%s'" % (donorid)
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
@@ -48,7 +48,7 @@ def retrievePlasmaById(cur,con,donorid):
 
 def retrieveHospitalById(cur,con,hospid):
     try:
-        query = "SELECT * FROM HOSPITAL WHERE Hospital_id='%s'" % (hospid)
+        query = "SELECT HOSPITAL.*,Contact,Address FROM HOSPITAL NATURAL JOIN USER WHERE Hospital_id='%s'" % (hospid)
         if cur.execute(query):
             pretty(cur.fetchall())
             con.commit()
