@@ -120,6 +120,7 @@ def invStaffOpt(cur,con,loginid):
 
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
     
 
 
@@ -146,6 +147,7 @@ def logStafOpt(cur,con,loginid):
             showAllVehi(cur,con)
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 
 def staffOpt(cur,con,loginid):
@@ -166,6 +168,7 @@ def staffOpt(cur,con,loginid):
         invStaffOpt(cur,con,loginid)
     else:
         logStafOpt(cur,con,loginid)
+    tmp = input("Enter any key to CONTINUE>")
 
 
 def donorOpt(cur,con,loginid):
@@ -183,6 +186,7 @@ def donorOpt(cur,con,loginid):
             retrievePlasmaById(cur,con,donorid)
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
 
 
 
@@ -208,4 +212,5 @@ def hospOpt(cur,con,loginid):
             retrieveOrderByHospId(cur,con,hospid)
         else:
             print("Invalid choice")
+        tmp = input("Enter any key to CONTINUE>")
     
