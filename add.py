@@ -288,8 +288,14 @@ def addPlasma(cur, con):
             quer = "UPDATE PLASMA_INVENTORY SET No_of_ABplus = No_of_ABplus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
         if btype == "AB-":
             quer = "UPDATE PLASMA_INVENTORY SET No_of_ABminus = No_of_ABminus + 1, Vacancy = Vacancy - 1 WHERE Inventory_id LIKE '%s'" %(inventory_id)
+
         
         cur.execute(quer)
+        con.commit()
+
+        #update numofdonations in donor
+        query2 = "UPDATE DONOR SET Number_of_donations = Number_of_donations+1 WHERE Donor_id = '%s'" %(row["Donor_id"])
+        cur.execute(query2)
         con.commit()
 
         print("Inserted Into Database")
