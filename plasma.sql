@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: plasma_bank
+-- Host: 127.0.0.1    Database: plasma
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -195,7 +195,7 @@ CREATE TABLE `ORDER_REQUEST` (
 
 LOCK TABLES `ORDER_REQUEST` WRITE;
 /*!40000 ALTER TABLE `ORDER_REQUEST` DISABLE KEYS */;
-INSERT INTO `ORDER_REQUEST` VALUES ('1','A+','2020-10-06',10.00,1,'1','1','1');
+INSERT INTO `ORDER_REQUEST` VALUES ('13','A+','2020-10-06',10.00,1,'1','1','1');
 /*!40000 ALTER TABLE `ORDER_REQUEST` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,4 +497,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-08 11:34:33
+-- Dump completed on 2020-10-08 14:55:08
