@@ -37,8 +37,8 @@ def getOrderVehicle(cur, con):
 
 def getDonAge(cur,con):
 	try:
-		mini = input("Enter minimum age: ")
-		maxi = input("Enter maximum age: ")
+		mini = int(input("Enter minimum age: "))
+		maxi = int(input("Enter maximum age: "))
 		query = "SELECT DISTINCT DONOR.* FROM DONOR NATURAL JOIN PLASMA WHERE Age>=%d AND Age<=%d AND Used=1" % (mini, maxi)
 		if cur.execute(query):
 			pretty(cur.fetchall())

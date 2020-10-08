@@ -53,7 +53,7 @@ def avgDons(cur,con):
 def avgOrders(cur,con):
 	try:
 		year = int(input("Enter year for which you want to see average number of orders placed per month: "))
-		query = "SELECT AVG(num) WHERE FROM (SELECT COUNT(Order_id),MONTH(Order_date) AS num FROM ORDER_REQUEST WHERE YEAR(Order_date) = '%d' GROUP BY MONTH(Order_date)) AS TAB" %(year)
+		query = "SELECT AVG(num) FROM (SELECT COUNT(Order_id),MONTH(Order_date) AS num FROM ORDER_REQUEST WHERE YEAR(Order_date) = '%d' GROUP BY MONTH(Order_date)) AS TAB" %(year)
 		if cur.execute(query):
 			pretty(cur.fetchall())
 		con.commit()
