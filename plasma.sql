@@ -178,14 +178,14 @@ CREATE TABLE `ORDER_REQUEST` (
   `Accepted` tinyint(1) NOT NULL,
   `Vehicle_id` varchar(10) DEFAULT NULL,
   `Donor_id` varchar(12) DEFAULT NULL,
-  `Hospital_id` varchar(12) NOT NULL,
+  `Hospital_id` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`Order_id`),
   KEY `Vehicle_id` (`Vehicle_id`),
   KEY `Hospital_id` (`Hospital_id`),
   KEY `Donor_id` (`Donor_id`),
-  CONSTRAINT `ORDER_REQUEST_ibfk_1` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ORDER_REQUEST_ibfk_2` FOREIGN KEY (`Hospital_id`) REFERENCES `HOSPITAL` (`Hospital_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ORDER_REQUEST_ibfk_3` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `ORDER_REQUEST_ibfk_1` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `ORDER_REQUEST_ibfk_2` FOREIGN KEY (`Hospital_id`) REFERENCES `HOSPITAL` (`Hospital_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `ORDER_REQUEST_ibfk_3` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -340,7 +340,7 @@ CREATE TABLE `STAFF` (
   KEY `Login_id` (`Login_id`),
   KEY `Supervisor` (`Supervisor`),
   CONSTRAINT `STAFF_ibfk_1` FOREIGN KEY (`Login_id`) REFERENCES `USER` (`Login_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `STAFF_ibfk_2` FOREIGN KEY (`Supervisor`) REFERENCES `STAFF` (`Staff_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `STAFF_ibfk_2` FOREIGN KEY (`Supervisor`) REFERENCES `STAFF` (`Staff_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -390,14 +390,14 @@ CREATE TABLE `SUPPLY` (
   `Order_id` varchar(12) NOT NULL,
   `Donor_id` varchar(12) DEFAULT NULL,
   `Vehicle_id` varchar(10) DEFAULT NULL,
-  `Inventory_id` varchar(12) NOT NULL,
+  `Inventory_id` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`Order_id`),
   KEY `Donor_id` (`Donor_id`),
   KEY `Vehicle_id` (`Vehicle_id`),
   KEY `Inventory_id` (`Inventory_id`),
-  CONSTRAINT `SUPPLY_ibfk_1` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `SUPPLY_ibfk_2` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `SUPPLY_ibfk_3` FOREIGN KEY (`Inventory_id`) REFERENCES `PLASMA_INVENTORY` (`Inventory_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `SUPPLY_ibfk_1` FOREIGN KEY (`Donor_id`) REFERENCES `PLASMA` (`Donor_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `SUPPLY_ibfk_2` FOREIGN KEY (`Vehicle_id`) REFERENCES `LOGISTICS` (`Vehicle_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `SUPPLY_ibfk_3` FOREIGN KEY (`Inventory_id`) REFERENCES `PLASMA_INVENTORY` (`Inventory_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
