@@ -62,7 +62,8 @@ def placeOrder(cur,con,loginid):
         row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
         allergies = (input("Patient allergies (comma separated): ")).split(',')
 
-        row["Order_id"] = input("Order ID:")
+        row["Order_id"] = row["Hospital_id"] + row["Patient_id"]
+
         row["Order_date"] = (input("Order date: "))
         query = "INSERT INTO ORDER_REQUEST(Order_id, Vehicle_id, Order_date, Hospital_id, Blood_type, Accepted, Distance, Donor_id) VALUES('%s', NULL, '%s', '%s', '%s', 0, %f, NULL)" % (
             row["Order_id"], row["Order_date"], row["Hospital_id"], row["Blood_type"], row["dist"])
@@ -84,7 +85,7 @@ def placeOrder(cur,con,loginid):
             con.commit()
 
         print("Registered your request")
-
+        print("Order id of the request is ",row["Order_id"])
         #check plasma inventory 
         if row["Blood_type"] == "A+":
             quer = "SELECT Inventory_id FROM PLASMA_INVENTORY WHERE No_of_Aplus >0"

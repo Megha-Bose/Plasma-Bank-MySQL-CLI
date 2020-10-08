@@ -191,9 +191,10 @@ def hospOpt(cur,con,loginid):
         print("1. View our details")
         print("2. View our patients")
         print("3. Place order")
-        print("4. Logout")
+        print("4. View our orders")
+        print("5. Logout")
         ch = int(input("Enter choice> "))
-        if ch==4:
+        if ch==5:
             return
         elif ch==1:
             displayMyDetails(cur, con, loginid)
@@ -202,6 +203,9 @@ def hospOpt(cur,con,loginid):
             retrievePatByHospId(cur,con,hospid)
         elif ch==3:
             placeOrder(cur, con, loginid)
+        elif ch==4:
+            hospid = loginid[8:len(loginid)]
+            retrieveOrderByHospId(cur,con,hospid)
         else:
             print("Invalid choice")
     
