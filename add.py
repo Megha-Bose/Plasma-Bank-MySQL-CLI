@@ -114,8 +114,13 @@ def addDonor(cur,con):
         row["noDon"] = int(input("Number of donations: "))
 
         bdate = row["Bdate"].split('-')
-        row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
 
+        row["Age"] = int(calcAge(date(int(bdate[0]),int(bdate[1]),int(bdate[2]))))
+        if(row["Age"]<18){
+            printf("Sorry, donor can't be below 18 years")
+            
+        }
+        else{
         query = "INSERT INTO DONOR(Name, Donor_id, Birth_date, Number_of_donations, Blood_type, Aadhar_num, Login_id, Age) VALUES('%s', '%s', '%s', %d, '%s', %d, '%s', %d)" % (
             row["name"], row["Donor_id"], row["Bdate"], row["noDon"], row["Blood_type"], row["aadhar"], row["Login_id"],row["Age"])
 
@@ -124,7 +129,7 @@ def addDonor(cur,con):
         con.commit()
 
         print("Inserted Into Database")
-
+        }
     except Exception as e:
         con.rollback()
         try:
