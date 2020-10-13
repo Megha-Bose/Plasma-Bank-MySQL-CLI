@@ -24,7 +24,7 @@ def delStaff(cur,con):
 
         query = "SELECT Department_id FROM WORKS_FOR WHERE Staff_id='%s'" % (row["Staff_id"])
         cur.execute(query)
-        row["dep"] = cur.fetchall()
+        row["dep"] = cur.fetchone()['Department_id']
         con.commit()
 
         query = "UPDATE DEPARTMENT SET No_of_employees=No_of_employees - 1 WHERE Department_id='%s'" % (row["dep"])

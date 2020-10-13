@@ -133,11 +133,11 @@ def addDonor(cur,con):
                 con.commit()
                 if cur.fetchone()['Donor_id']=='NULL':
                     delUser(cur,con,row["Login_id"])
-        except Exception as e:
+        except Exception as e1:
             con.rollback()
             print("query failed")
         print("Failed to insert into database")
-        print(">>>>>>>>>>>>>", e)
+        print(">>>>>>>>>>>>>", e1)
 
     return
 
